@@ -1,0 +1,6 @@
+@TASKWAVE.API_HostAddress = http://localhost:5038
+
+GET {{TASKWAVE.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
