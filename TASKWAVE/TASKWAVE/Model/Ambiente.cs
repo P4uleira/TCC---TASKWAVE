@@ -12,6 +12,8 @@ namespace TASKWAVE.ENTITY.Model
         public string NomeAmbiente { get; set; }
         public string? DescricaoAmbiente { get; set; }
 
+        public ICollection<Setor> Setores { get; }
+
         public Ambiente()
         {
         }

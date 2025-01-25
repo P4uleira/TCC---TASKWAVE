@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +12,9 @@ namespace TASKWAVE.ENTITY.Model
         public int IdSetor { get; set; }
         public string NomeSetor { get; set; }
         public string? DescricaoSetor { get; set; }
+
+        public int AmbienteId { get; set; }
+        public Ambiente Ambiente { get; set; }
 
         public Setor()
         {
