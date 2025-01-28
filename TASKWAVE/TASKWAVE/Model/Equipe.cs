@@ -9,18 +9,22 @@ namespace TASKWAVE.ENTITY.Model
     public class Equipe
     {
         public int IdEquipe { get; set; }
-        public string NomeSetor { get; set; }
-        public string? DescricaoSetor { get; set; }
+        public string NomeEquipe { get; set; }
+        public string? DescricaoEquipe { get; set; }
+
+        public int SetorId { get; set; }
+        public Setor Setor { get; set; }
+        public List<Projeto> Projetos { get; set; }
 
         public Equipe()
         {
         }
 
-        public Equipe(int idEquipe, string nomeSetor, string? descricaoSetor)
+        public Equipe(int idEquipe, string nomeEquipe, string? descricaoEquipe)
         {
             IdEquipe = idEquipe;
-            NomeSetor = nomeSetor;
-            DescricaoSetor = descricaoSetor;
+            NomeEquipe = nomeEquipe;
+            DescricaoEquipe = descricaoEquipe;
         }
     }
 }

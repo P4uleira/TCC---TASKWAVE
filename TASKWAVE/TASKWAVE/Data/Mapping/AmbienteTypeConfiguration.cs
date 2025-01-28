@@ -23,7 +23,8 @@ namespace TASKWAVE.ENTITY.Data.Mapping
                 .HasMany(e => e.Setores)
                 .WithOne(e => e.Ambiente)
                 .HasForeignKey(e => e.AmbienteId)
-                .HasPrincipalKey(e => e.IdAmbiente);
+                .HasPrincipalKey(e => e.IdAmbiente)
+                .OnDelete(DeleteBehavior.Cascade); 
         }
     }
 }

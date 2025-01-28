@@ -16,6 +16,8 @@ namespace TASKWAVE.ENTITY.Model
         public int AmbienteId { get; set; }
         public Ambiente Ambiente { get; set; }
 
+        public ICollection<Equipe> Equipes { get; set; }
+
         public Setor()
         {
         }

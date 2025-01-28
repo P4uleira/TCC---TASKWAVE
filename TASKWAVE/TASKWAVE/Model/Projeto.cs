@@ -12,7 +12,7 @@ namespace TASKWAVE.ENTITY.Model
         public string NomeProjeto { get; set; }
         public string? DescricaoProjeto { get; set; }
         public DateTime DataCriacaoProjeto { get; set; }
-
+        public List<Equipe> Equipes { get; }
         public Projeto()
         {
         }
