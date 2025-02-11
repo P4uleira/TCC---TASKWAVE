@@ -16,6 +16,8 @@ namespace TASKWAVE.ENTITY.Model
         public DateTime DataCriacaoTarefa { get; set; }
         public DateTime DataPrevistaTarefa { get; set; }
         public DateTime DataFinalTarefa { get; set; }
+        public int ProjetoId { get; set; }
+        public Projeto Projeto { get; set; }
 
         public Tarefa()
         {

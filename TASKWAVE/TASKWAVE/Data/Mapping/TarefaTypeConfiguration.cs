@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Metadata;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using TASKWAVE.ENTITY.Model;
+
+namespace TASKWAVE.ENTITY.Data.Mapping
+{
+    internal class TarefaTypeConfiguration : IEntityTypeConfiguration<Tarefa>
+    {
+        public void Configure(EntityTypeBuilder<Tarefa> entity)
+        {
+            entity.ToTable("TB_TAREFA");
+            entity.Property(e => e.IdTarefa).HasColumnName("ID_TAREFA");
+            entity.Property(e => e.NomeTarefa).HasColumnName("NOME_TAREFA");
+            entity.Property(e => e.DescricaoTarefa).HasColumnName("DESCRICAO_TAREFA");
+            entity.Property(e => e.SituacaoTarefa).HasColumnName("SITUACAO_TAREFA");
+            entity.Property(e => e.PrioridadeTarefa).HasColumnName("PRIORIDADE_TAREFA");
+            entity.Property(e => e.DataCriacaoTarefa).HasColumnName("DATA_CRIACAO_TAREFA");
+            entity.Property(e => e.DataPrevistaTarefa).HasColumnName("DATA_PREVISTA_TAREFA");
+            entity.Property(e => e.DataFinalTarefa).HasColumnName("DATA_FINAL_TAREFA");
+
+        }
+    }
+}

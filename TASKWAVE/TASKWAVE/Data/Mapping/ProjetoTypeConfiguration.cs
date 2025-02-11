@@ -14,10 +14,18 @@ namespace TASKWAVE.ENTITY.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Projeto> entity)
         {
+
             entity.ToTable("TB_PROJETO");
             entity.Property(e => e.IdProjeto).HasColumnName("ID_PROJETO");
             entity.Property(e => e.NomeProjeto).HasColumnName("NOME_PROJETO");
             entity.Property(e => e.DescricaoProjeto).HasColumnName("DESCRICAO_PROJETO");
+
+            entity
+                .HasMany(e => e.Tarefas)
+                .WithOne(e => e.Projeto)
+                .HasForeignKey(e => e.ProjetoId)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }
