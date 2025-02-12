@@ -15,6 +15,7 @@ namespace TASKWAVE.ENTITY.Data.Mapping
         public void Configure(EntityTypeBuilder<Ambiente> entity)
         {
             entity.ToTable("TB_AMBIENTE");
+            entity.HasKey(e => e.IdAmbiente);
             entity.Property(e => e.IdAmbiente).HasColumnName("ID_AMBIENTE");
             entity.Property(e => e.NomeAmbiente).HasColumnName("NOME_AMBIENTE");
             entity.Property(e => e.DescricaoAmbiente).HasColumnName("DESCRICAO_AMBIENTE");

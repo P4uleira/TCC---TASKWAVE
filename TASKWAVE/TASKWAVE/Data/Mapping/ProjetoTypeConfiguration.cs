@@ -16,6 +16,7 @@ namespace TASKWAVE.ENTITY.Data.Mapping
         {
 
             entity.ToTable("TB_PROJETO");
+            entity.HasKey(e => e.IdProjeto);
             entity.Property(e => e.IdProjeto).HasColumnName("ID_PROJETO");
             entity.Property(e => e.NomeProjeto).HasColumnName("NOME_PROJETO");
             entity.Property(e => e.DescricaoProjeto).HasColumnName("DESCRICAO_PROJETO");
