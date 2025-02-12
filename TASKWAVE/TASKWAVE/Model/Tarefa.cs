@@ -18,6 +18,8 @@ namespace TASKWAVE.ENTITY.Model
         public DateTime DataFinalTarefa { get; set; }
         public int ProjetoId { get; set; }
         public Projeto Projeto { get; set; }
+        public ICollection<Mensagem> Mensagems { get; set; }
+        public ICollection<HistoricoTarefa> HistoricoTarefas { get; set; }
 
         public Tarefa()
         {

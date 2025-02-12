@@ -35,5 +35,9 @@ namespace TASKWAVE.ENTITY.Data
         public DbSet<Equipe> Equipes { get; set; }
         public DbSet<Projeto> Projetos { get; set; }
         public DbSet<Tarefa> Tarefas { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Mensagem> Mensagens { get; set; }
+        public DbSet<HistoricoTarefa> HistoricoTarefas { get; set; }
+        public DbSet<Acesso> Acessos { get; set; }
     }
 }

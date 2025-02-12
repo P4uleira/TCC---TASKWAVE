@@ -19,7 +19,7 @@ namespace TASKWAVE.ENTITY.Data.Mapping
             entity.Property(e => e.NomeUsuario).HasColumnName("NOME_USUARIO");
             entity.Property(e => e.EmailUsuario).HasColumnName("EMAIL_USUARIO");
             entity.Property(e => e.SenhaUsuario).HasColumnName("SENHA_USUARIO");
-            entity.Property(e => e.DataCriacaoUsuario).HasColumnName("DATA_CRIACACAO_USUARIO");
+            entity.Property(e => e.DataCriacaoUsuario).HasColumnName("DATA_CRIACAO_USUARIO");
 
         }
     }

@@ -14,7 +14,8 @@ namespace TASKWAVE.ENTITY.Model
 
         public int SetorId { get; set; }
         public Setor Setor { get; set; }
-        public List<Projeto> Projetos { get; set; }
+        public ICollection<Projeto> Projetos { get; set; }
+        public ICollection<Usuario> Usuarios { get; set; }
 
         public Equipe()
         {

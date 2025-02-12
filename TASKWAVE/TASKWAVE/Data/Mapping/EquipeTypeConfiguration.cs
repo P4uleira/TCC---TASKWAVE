@@ -34,7 +34,27 @@ namespace TASKWAVE.ENTITY.Data.Mapping
                   {
                       j.HasKey("EQUIPE_ID", "PROJETO_ID");
                       j.ToTable("TB_EQUIPE_PROJETO");
-                  });
+                  }
+              );
+               
+            entity.HasMany(e => e.Usuarios)
+              .WithMany(p => p.Equipes)
+              .UsingEntity<Dictionary<string, object>>(
+                  "TB_EQUIPE_USUARIO",
+                  l => l.HasOne<Usuario>()
+                        .WithMany()
+                        .HasForeignKey("USUARIO_ID")
+                        .HasConstraintName("FK_USUARIO_ID"),
+                  r => r.HasOne<Equipe>()
+                        .WithMany()
+                        .HasForeignKey("EQUIPE_ID")
+                        .HasConstraintName("FK_EQUIPE_ID"),
+                  j =>
+                  {
+                      j.HasKey("EQUIPE_ID", "USUARIO_ID");
+                      j.ToTable("TB_EQUIPE_USUARIO");
+                  }
+              );
         }
     }
 }

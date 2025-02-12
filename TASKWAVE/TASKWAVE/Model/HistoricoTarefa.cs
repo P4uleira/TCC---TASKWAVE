@@ -14,7 +14,8 @@ namespace TASKWAVE.ENTITY.Model
         public string SituacaoAnteriorTarefa { get; set; }
         public string PrioridadeAtualTarefa { get; set; }
         public string PrioridadeAnteriorTarefa { get; set; }
-
+        public int TarefaID { get; set; }
+        public Tarefa Tarefa { get; set; }
         public HistoricoTarefa()
         {
         }

@@ -24,6 +24,19 @@ namespace TASKWAVE.ENTITY.Data.Mapping
             entity.Property(e => e.DataPrevistaTarefa).HasColumnName("DATA_PREVISTA_TAREFA");
             entity.Property(e => e.DataFinalTarefa).HasColumnName("DATA_FINAL_TAREFA");
 
+            entity
+                .HasMany(e => e.Mensagems)
+                .WithOne(e => e.Tarefa)
+                .HasForeignKey(e => e.TarefaID)
+                .HasPrincipalKey(e => e.IdTarefa)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity
+                .HasMany(e => e.HistoricoTarefas)
+                .WithOne(e => e.Tarefa)
+                .HasForeignKey(e => e.TarefaID)
+                .HasPrincipalKey(e => e.IdTarefa)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -13,6 +13,8 @@ namespace TASKWAVE.ENTITY.Model
         public string EmailUsuario { get; set; }
         public string SenhaUsuario { get; set; }
         public DateTime DataCriacaoUsuario { get; set; }
+        public ICollection<Equipe> Equipes { get; set; }
+        public ICollection<Acesso> Acessos { get; set; }
 
         public Usuario()
         {
