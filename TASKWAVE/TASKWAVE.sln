@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TASKWAVE.ENTITY", "TASKWAVE\TASKWAVE.ENTITY.csproj", "{89957B53-E3FE-4A7E-AF83-1263A530134C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TASKWAVE.API", "TASKWAVE.API\TASKWAVE.API.csproj", "{E048403F-9A22-4535-B8D2-32FA5ABF8BC4}"
 EndProject
 Global
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{89957B53-E3FE-4A7E-AF83-1263A530134C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{89957B53-E3FE-4A7E-AF83-1263A530134C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{89957B53-E3FE-4A7E-AF83-1263A530134C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{89957B53-E3FE-4A7E-AF83-1263A530134C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E048403F-9A22-4535-B8D2-32FA5ABF8BC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E048403F-9A22-4535-B8D2-32FA5ABF8BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E048403F-9A22-4535-B8D2-32FA5ABF8BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU

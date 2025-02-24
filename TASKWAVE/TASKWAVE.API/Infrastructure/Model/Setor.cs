@@ -5,7 +5,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TASKWAVE.ENTITY.Model
+namespace TASKWAVE.API.Infrastructure.Model
 {
     public class Setor
     {

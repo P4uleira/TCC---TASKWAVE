@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TASKWAVE.ENTITY.Model;
+using TASKWAVE.API.Infrastructure.Model;
 
-namespace TASKWAVE.ENTITY.Data.Mapping
+namespace TASKWAVE.API.Infrastructure.Data.Mapping
 {
     internal class MensagemTypeConfiguration : IEntityTypeConfiguration<Mensagem>
     {
@@ -19,7 +19,7 @@ namespace TASKWAVE.ENTITY.Data.Mapping
             entity.Property(e => e.IdMensagem).HasColumnName("ID_MENSAGEM");
             entity.Property(e => e.ConteudoMensagem).HasColumnName("CONTEUDO_MENSAGEM");
             entity.Property(e => e.DataEnvioMensagem).HasColumnName("DATA_ENVIO_MENSAGEM");
-            
+
         }
     }
 }

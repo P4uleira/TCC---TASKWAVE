@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using TASKWAVE.ENTITY.Model;
+using TASKWAVE.API.Infrastructure.Model;
 
-namespace TASKWAVE.ENTITY.Data
+namespace TASKWAVE.API.Infrastructure.Data
 {
     public class TaskWaveContext : DbContext
     {

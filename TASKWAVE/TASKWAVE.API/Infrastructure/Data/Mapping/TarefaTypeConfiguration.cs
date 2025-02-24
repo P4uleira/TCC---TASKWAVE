@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TASKWAVE.ENTITY.Model;
+using TASKWAVE.API.Infrastructure.Model;
 
-namespace TASKWAVE.ENTITY.Data.Mapping
+namespace TASKWAVE.API.Infrastructure.Data.Mapping
 {
     internal class TarefaTypeConfiguration : IEntityTypeConfiguration<Tarefa>
     {
