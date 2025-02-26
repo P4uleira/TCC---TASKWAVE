@@ -22,6 +22,7 @@ namespace TASKWAVE.API.Infrastructure.Data
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(_configuration.GetConnectionString("ConnectionStrings:DefaultConnection"));
+                optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information); //estou definindo que a saida de log será no console e so aparecerá informação.
             }
         }
 
