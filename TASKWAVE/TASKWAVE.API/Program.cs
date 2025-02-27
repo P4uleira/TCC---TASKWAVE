@@ -1,6 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using TASKWAVE.API.Endpoints;
-using TASKWAVE.API.Infrastructure.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +11,7 @@ builder.Services.AddDbContext<TaskWaveContext>(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<TaskWaveContext>();
+
 
 var app = builder.Build();
 
