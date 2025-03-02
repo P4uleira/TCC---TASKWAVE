@@ -14,5 +14,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\TASKWAVE.DOMAIN\TASKWAVE.DOMAIN.csproj" />
+	  <ProjectReference Include="..\TASKWAVE.INFRA\TASKWAVE.INFRA.csproj" />
 	</ItemGroup>
 </Project>

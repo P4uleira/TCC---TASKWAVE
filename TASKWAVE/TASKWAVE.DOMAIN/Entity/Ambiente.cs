@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TASKWAVE.API.Infrastructure.Model
+﻿namespace TASKWAVE.API.Infrastructure.Model
 {
     public class Ambiente
     {
@@ -18,9 +12,8 @@ namespace TASKWAVE.API.Infrastructure.Model
         {
         }
 
-        public Ambiente(int idAmbiente, string nomeAmbiente, string? descricaoAmbiente)
+        public Ambiente(string nomeAmbiente, string? descricaoAmbiente)
         {
-            IdAmbiente = idAmbiente;
             NomeAmbiente = nomeAmbiente;
             DescricaoAmbiente = descricaoAmbiente;
         }
