@@ -22,6 +22,9 @@ builder.Services.AddScoped<IAmbienteService, AmbienteService>();
 builder.Services.AddScoped<ISetorRepository, SetorRepository>();
 builder.Services.AddScoped<ISetorService, SetorService>();
 
+builder.Services.AddScoped<IEquipeRepository, EquipeRepository>();
+builder.Services.AddScoped<IEquipeService, EquipeService>();
+
 
 builder.Services.AddControllers();
 var app = builder.Build();
