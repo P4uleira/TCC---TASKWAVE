@@ -19,6 +19,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAmbienteRepository, AmbienteRepository>();
 builder.Services.AddScoped<IAmbienteService, AmbienteService>();
 
+builder.Services.AddScoped<ISetorRepository, SetorRepository>();
+builder.Services.AddScoped<ISetorService, SetorService>();
+
 
 builder.Services.AddControllers();
 var app = builder.Build();

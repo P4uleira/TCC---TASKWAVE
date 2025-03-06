@@ -16,11 +16,11 @@ namespace TASKWAVE.API.Infrastructure.Model
         {
         }
 
-        public Setor(int idSetor, string nomeSetor, string? descricaoSetor)
+        public Setor(string nomeSetor, string? descricaoSetor, int ambienteId)
         {
-            IdSetor = idSetor;
             NomeSetor = nomeSetor;
             DescricaoSetor = descricaoSetor;
+            AmbienteId = ambienteId;
         }
     }
 }
