@@ -2,5 +2,5 @@
 
 namespace TASKWAVE.DOMAIN.Interfaces.Repositories
 {
-    public interface IAmbienteRepository : IBaseRepository<Ambiente>{ }
+    public interface ISetorRepository : IBaseRepository<Setor>{ }
 }
