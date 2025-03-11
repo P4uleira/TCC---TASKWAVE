@@ -3,6 +3,7 @@ using TASKWAVE.API.Infrastructure.Model;
 using TASKWAVE.API.Requests;
 using TASKWAVE.API.Responses;
 using TASKWAVE.DOMAIN.Interfaces.Services;
+using TASKWAVE.DOMAIN.Services;
 
 namespace TASKWAVE.API.Controllers
 {
@@ -32,6 +33,12 @@ namespace TASKWAVE.API.Controllers
             if (equipe == null)
                 return NotFound();
             return Ok(new EquipeResponse(equipe.NomeEquipe, equipe.DescricaoEquipe, equipe.SetorId));
+        }
+
+        [HttpPost("AddProjectToEquipe/{idEquipe}/{idProjeto}")]
+        public async Task InsertProjectToEquip(int idEquipe, int idProjeto)
+        {
+            await _equipeService.InsertProjectToEquip(idProjeto, idEquipe);
         }
 
         [HttpPost]

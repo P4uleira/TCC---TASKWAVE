@@ -53,7 +53,7 @@ namespace TASKWAVE.API.Controllers
                 return NotFound();
             }
 
-            setorExistente.DescricaoSetor = request.descricaoSetor;
+            setorExistente.NomeSetor = request.nomeSetor;
             setorExistente.DescricaoSetor = request.descricaoSetor;
             setorExistente.AmbienteId = request.idAmbiente;
 
