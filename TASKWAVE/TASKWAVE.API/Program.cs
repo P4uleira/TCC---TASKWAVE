@@ -25,6 +25,9 @@ builder.Services.AddScoped<ISetorService, SetorService>();
 builder.Services.AddScoped<IEquipeRepository, EquipeRepository>();
 builder.Services.AddScoped<IEquipeService, EquipeService>();
 
+builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
+builder.Services.AddScoped<IProjetoService, ProjetoService>();
+
 
 builder.Services.AddControllers();
 var app = builder.Build();

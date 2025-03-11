@@ -37,5 +37,6 @@ namespace TASKWAVE.API.Infrastructure.Data
         public DbSet<Mensagem> Mensagens { get; set; }
         public DbSet<HistoricoTarefa> HistoricoTarefas { get; set; }
         public DbSet<Acesso> Acessos { get; set; }
+        
     }
 }

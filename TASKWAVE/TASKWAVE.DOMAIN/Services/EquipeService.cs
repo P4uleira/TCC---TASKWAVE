@@ -23,6 +23,10 @@ namespace TASKWAVE.DOMAIN.Services
             await _equipeRepository.UpdateAsync(equipe);
         }
 
+        public async Task InsertProjectToEquip(int idProjeto, int idEquipe)
+        {
+            await _equipeRepository.InsertProjectToEquip(idProjeto, idEquipe);
+        }
         public async Task DeleteEquipe(int id)
         {
             await _equipeRepository.DeleteAsync(id);
@@ -36,6 +40,11 @@ namespace TASKWAVE.DOMAIN.Services
         public async Task<Equipe> GetEquipeById(int id)
         {
             return await _equipeRepository.GetByIdAsync(id);
+        }
+
+        public async Task SetProjectEquipe(int idEquipe, int idProjeto)
+        {
+
         }
     }
 }

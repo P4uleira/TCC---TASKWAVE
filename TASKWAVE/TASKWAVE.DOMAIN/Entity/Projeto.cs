@@ -6,18 +6,26 @@
         public string NomeProjeto { get; set; }
         public string? DescricaoProjeto { get; set; }
         public DateTime DataCriacaoProjeto { get; set; }
-        public ICollection<Equipe> Equipes { get; }
-        public ICollection<Tarefa> Tarefas { get; }
+        public ICollection<Equipe> Equipes { get; set; }
+        public ICollection<Tarefa> Tarefas { get; set; }
+
         public Projeto()
         {
         }
 
-        public Projeto(int idProjeto, string nomeProjeto, string? descricaoProjeto, DateTime dataCriacaoProjeto)
+        public Projeto(string nomeProjeto, string? descricaoProjeto, DateTime dataCriacaoProjeto)
         {
-            IdProjeto = idProjeto;
             NomeProjeto = nomeProjeto;
             DescricaoProjeto = descricaoProjeto;
             DataCriacaoProjeto = dataCriacaoProjeto;
+        }
+
+        public Projeto(string nomeProjeto, string? descricaoProjeto, DateTime dataCriacaoProjeto, ICollection<Equipe> equipes)
+        {
+            NomeProjeto = nomeProjeto;
+            DescricaoProjeto = descricaoProjeto;
+            DataCriacaoProjeto = dataCriacaoProjeto;
+            Equipes = equipes;
         }
     }
 }

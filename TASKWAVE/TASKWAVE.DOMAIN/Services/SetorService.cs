@@ -8,7 +8,7 @@ namespace TASKWAVE.DOMAIN.Services
     {
         private readonly ISetorRepository _setorRepository;
 
-        public SetorService(ISetorRepository  setorRepository)
+        public SetorService(ISetorRepository setorRepository)
         {
             _setorRepository = setorRepository;
         }
