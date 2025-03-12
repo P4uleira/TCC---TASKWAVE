@@ -10,5 +10,6 @@ namespace TASKWAVE.DOMAIN.Interfaces.Services
         Task<IEnumerable<Equipe>> GetAllEquipes();
         Task<Equipe> GetEquipeById(int id);
         Task InsertProjectToEquip(int idProjeto, int idEquipe);
+        Task InsertUserToEquip(int idUsuario, int idEquipe);
     }
 }

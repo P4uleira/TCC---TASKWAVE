@@ -22,10 +22,10 @@ namespace TASKWAVE.INFRA.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            var ambiente = await _context.Setores.FindAsync(id);
-            if (ambiente != null)
+            var setor = await _context.Setores.FindAsync(id);
+            if (setor != null)
             {
-                _context.Setores.Remove(ambiente);
+                _context.Setores.Remove(setor);
                 _context.SaveChanges();
             }
         }

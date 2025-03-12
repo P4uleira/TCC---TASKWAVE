@@ -28,6 +28,9 @@ builder.Services.AddScoped<IEquipeService, EquipeService>();
 builder.Services.AddScoped<IProjetoRepository, ProjetoRepository>();
 builder.Services.AddScoped<IProjetoService, ProjetoService>();
 
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
 
 builder.Services.AddControllers();
 var app = builder.Build();

@@ -41,6 +41,26 @@ namespace TASKWAVE.INFRA.Repositories
             }
         }
 
+        public async Task InsertUserToEquip(int idUsuario, int idEquipe)
+        {
+            var equipe = await _context.Equipes
+            .Include(e => e.Usuarios) // Garante que a coleção Projetos seja carregada
+            .FirstOrDefaultAsync(e => e.IdEquipe == idEquipe);
+
+            var usuario = await _context.Usuarios.FindAsync(idUsuario);
+
+            if (equipe == null || usuario == null)
+            {
+                throw new Exception("Equipe ou Usuario não encontrados.");
+            }
+
+            // Verifica se já existe essa relação para evitar duplicatas
+            if (!equipe.Usuarios.Any(p => p.IdUsuario == idUsuario))
+            {
+                equipe.Usuarios.Add(usuario); // Adiciona o usuario à equipe
+                await _context.SaveChangesAsync(); // Salva as alterações no banco
+            }
+        }
 
         public async Task DeleteAsync(int id)
         {

@@ -14,13 +14,21 @@
         {
         }
 
-        public Usuario(int idUsuario, string nomeUsuario, string emailUsuario, string senhaUsuario, DateTime dataCriacaoUsuario)
+        public Usuario(string nomeUsuario, string emailUsuario, string senhaUsuario, DateTime dataCriacaoUsuario)
         {
-            IdUsuario = idUsuario;
             NomeUsuario = nomeUsuario;
             EmailUsuario = emailUsuario;
             SenhaUsuario = senhaUsuario;
             DataCriacaoUsuario = dataCriacaoUsuario;
+        }
+
+        public Usuario(string nomeUsuario, string emailUsuario, string senhaUsuario, DateTime dataCriacaoUsuario, ICollection<Equipe> equipes) 
+        {
+            NomeUsuario= nomeUsuario;
+            EmailUsuario = emailUsuario;    
+            SenhaUsuario = senhaUsuario;
+            DataCriacaoUsuario = dataCriacaoUsuario;
+            Equipes = equipes;
         }
     }
 }
