@@ -27,5 +27,6 @@
             DataCriacaoProjeto = dataCriacaoProjeto;
             Equipes = equipes;
         }
+
     }
 }

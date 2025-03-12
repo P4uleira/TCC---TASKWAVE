@@ -27,6 +27,11 @@ namespace TASKWAVE.DOMAIN.Services
         {
             await _equipeRepository.InsertProjectToEquip(idProjeto, idEquipe);
         }
+
+        public async Task InsertUserToEquip(int idUsuario, int idEquipe)
+        {
+            await _equipeRepository.InsertUserToEquip(idUsuario, idEquipe);
+        }
         public async Task DeleteEquipe(int id)
         {
             await _equipeRepository.DeleteAsync(id);

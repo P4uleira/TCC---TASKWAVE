@@ -41,6 +41,12 @@ namespace TASKWAVE.API.Controllers
             await _equipeService.InsertProjectToEquip(idProjeto, idEquipe);
         }
 
+        [HttpPost("AddUserToEquipe/{idEquipe}/{idUsuario}")]
+        public async Task InsertUserToEquip(int idEquipe, int idUsuario)
+        {
+            await _equipeService.InsertUserToEquip(idUsuario, idEquipe);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Create(EquipeRequest request)
         {
