@@ -31,6 +31,9 @@ builder.Services.AddScoped<IProjetoService, ProjetoService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
+builder.Services.AddScoped<IAcessoRepository, AcessoRepository>();
+builder.Services.AddScoped<IAcessoService, AcessoService>();
+
 
 builder.Services.AddControllers();
 var app = builder.Build();

@@ -11,9 +11,8 @@
         {
         }
 
-        public Acesso(int idAcesso, string nomeAcesso, string? descricaoAcesso, DateTime dataCriacaoAcesso)
+        public Acesso(string nomeAcesso, string? descricaoAcesso, DateTime dataCriacaoAcesso)
         {
-            IdAcesso = idAcesso;
             NomeAcesso = nomeAcesso;
             DescricaoAcesso = descricaoAcesso;
             DataCriacaoAcesso = dataCriacaoAcesso;
