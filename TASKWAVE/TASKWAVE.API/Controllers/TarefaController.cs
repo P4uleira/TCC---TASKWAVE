@@ -44,9 +44,9 @@ namespace TASKWAVE.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = task.IdTarefa }, null);
         }
         [HttpPut("{idTask}")]
-        public async Task<ActionResult> Update(int id, TarefaRequest taskRequest)
+        public async Task<ActionResult> Update(int idTask, TarefaRequest taskRequest)
         {
-            var taskExist = await _taskService.GetTaskById(id);
+            var taskExist = await _taskService.GetTaskById(idTask);
             if (taskExist == null)
             {
                 return NotFound();
