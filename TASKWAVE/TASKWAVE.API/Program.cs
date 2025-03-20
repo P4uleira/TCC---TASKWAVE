@@ -37,6 +37,8 @@ builder.Services.AddScoped<IAcessoService, AcessoService>();
 builder.Services.AddScoped<IMensagemRepository, MensagemRepository>();
 builder.Services.AddScoped<IMensagemService, MensagemService>();
 
+builder.Services.AddScoped<ITarefaRepository, TarefaRepository>();
+builder.Services.AddScoped<ITarefaService, TarefaService>();
 
 builder.Services.AddControllers();
 var app = builder.Build();
