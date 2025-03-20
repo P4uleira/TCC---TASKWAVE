@@ -44,7 +44,7 @@ namespace TASKWAVE.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = message.IdMensagem }, null);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{idMessage}")]
         public async Task<ActionResult> Update(int idMessage, MensagemRequest messageRequest)
         {
 
@@ -60,7 +60,7 @@ namespace TASKWAVE.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{idMessage}")]
         public async Task<ActionResult> Delete(int idMessage)
         {
             await _messageService.DeleteMessage(idMessage);
