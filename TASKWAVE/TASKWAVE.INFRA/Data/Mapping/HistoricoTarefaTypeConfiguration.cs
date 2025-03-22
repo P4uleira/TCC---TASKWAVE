@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TASKWAVE.API.Infrastructure.Model;
+using TASKWAVE.DOMAIN.Enums;
 
 namespace TASKWAVE.API.Infrastructure.Data.Mapping
 {
@@ -12,10 +14,10 @@ namespace TASKWAVE.API.Infrastructure.Data.Mapping
             entity.HasKey(e => e.IdHistoricoTarefa);
             entity.Property(e => e.IdHistoricoTarefa).HasColumnName("ID_HISTORICO_TAREFA");
             entity.Property(e => e.DataMudancaTarefa).HasColumnName("DATA_MUDANCA_TAREFA");
-            entity.Property(e => e.SituacaoAtualTarefa).HasColumnName("SITUACAO_ATUAL_TAREFA");
-            entity.Property(e => e.SituacaoAnteriorTarefa).HasColumnName("SITUACAO_ANTERIOR_TAREFA");
-            entity.Property(e => e.PrioridadeAtualTarefa).HasColumnName("PRIORIDADE_ATUAL_TAREFA");
-            entity.Property(e => e.PrioridadeAnteriorTarefa).HasColumnName("PRIORIDADE_ANTERIOR_TAREFA");
+            entity.Property(e => e.SituacaoAtualTarefa).HasColumnName("SITUACAO_ATUAL_TAREFA").HasConversion(new EnumToStringConverter<SituacaoTarefaEnum>());
+            entity.Property(e => e.SituacaoAnteriorTarefa).HasColumnName("SITUACAO_ANTERIOR_TAREFA").HasConversion(new EnumToStringConverter<SituacaoTarefaEnum>());
+            entity.Property(e => e.PrioridadeAtualTarefa).HasColumnName("PRIORIDADE_ATUAL_TAREFA").HasConversion(new EnumToStringConverter<PrioridadeTarefaEnum>());
+            entity.Property(e => e.PrioridadeAnteriorTarefa).HasColumnName("PRIORIDADE_ANTERIOR_TAREFA").HasConversion(new EnumToStringConverter<PrioridadeTarefaEnum>());
 
         }
     }

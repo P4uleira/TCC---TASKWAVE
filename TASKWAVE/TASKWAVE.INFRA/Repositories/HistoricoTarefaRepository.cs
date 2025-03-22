@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using TASKWAVE.API.Infrastructure.Data;
 using TASKWAVE.API.Infrastructure.Model;
+using TASKWAVE.DOMAIN.Enums;
 using TASKWAVE.DOMAIN.Interfaces.Repositories;
 
 
@@ -34,26 +35,32 @@ namespace TASKWAVE.INFRA.Repositories
 
             if (taskHistoryToUpdate != null)
             {
-                var oldSituation = taskHistoryToUpdate.SituacaoAtualTarefa;
-                var oldPriorit = taskHistoryToUpdate.PrioridadeAtualTarefa;
+                SituacaoTarefaEnum oldSituation = taskHistoryToUpdate.SituacaoAtualTarefa;
+                PrioridadeTarefaEnum oldPriorit = taskHistoryToUpdate.PrioridadeAtualTarefa;
 
-                if(taskHistoryToUpdate.SituacaoAtualTarefa != oldSituation )
+                bool updated = false;
+
+                if (taskHistoryToUpdate.SituacaoAtualTarefa != taskToUpdate.SituacaoAtualTarefa)
                 {
                     taskHistoryToUpdate.SituacaoAnteriorTarefa = oldSituation;
                     taskHistoryToUpdate.SituacaoAtualTarefa = taskToUpdate.SituacaoAtualTarefa;
                     taskHistoryToUpdate.DataMudancaTarefa = DateTime.Now;
-                    _context.HistoricoTarefas.Add(taskHistoryToUpdate);
+                    updated = true;
                 }
 
-                if(taskHistoryToUpdate.PrioridadeAtualTarefa != oldPriorit)
+                if (taskHistoryToUpdate.PrioridadeAtualTarefa != taskToUpdate.PrioridadeAtualTarefa)
                 {
                     taskHistoryToUpdate.PrioridadeAnteriorTarefa = oldPriorit;
                     taskHistoryToUpdate.PrioridadeAtualTarefa = taskToUpdate.PrioridadeAtualTarefa;
                     taskHistoryToUpdate.DataMudancaTarefa = DateTime.Now;
-                    _context.HistoricoTarefas.Add(taskHistoryToUpdate);
+                    updated = true;
                 }
 
-                _context.SaveChanges();
+                if (updated)
+                {
+                    _context.HistoricoTarefas.Update(taskHistoryToUpdate);
+                    await _context.SaveChangesAsync();
+                }
             }
         }
     }

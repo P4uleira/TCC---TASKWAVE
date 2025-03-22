@@ -113,20 +113,22 @@ namespace TASKWAVE.ENTITY.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DATA_MUDANCA_TAREFA");
 
-                    b.Property<int?>("PrioridadeAnteriorTarefa")
-                        .HasColumnType("int")
+                    b.Property<string>("PrioridadeAnteriorTarefa")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("PRIORIDADE_ANTERIOR_TAREFA");
 
-                    b.Property<int>("PrioridadeAtualTarefa")
-                        .HasColumnType("int")
+                    b.Property<string>("PrioridadeAtualTarefa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("PRIORIDADE_ATUAL_TAREFA");
 
-                    b.Property<int?>("SituacaoAnteriorTarefa")
-                        .HasColumnType("int")
+                    b.Property<string>("SituacaoAnteriorTarefa")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("SITUACAO_ANTERIOR_TAREFA");
 
-                    b.Property<int>("SituacaoAtualTarefa")
-                        .HasColumnType("int")
+                    b.Property<string>("SituacaoAtualTarefa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("SITUACAO_ATUAL_TAREFA");
 
                     b.Property<int>("TarefaID")

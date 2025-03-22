@@ -40,6 +40,9 @@ builder.Services.AddScoped<IMensagemService, MensagemService>();
 builder.Services.AddScoped<ITarefaRepository, TarefaRepository>();
 builder.Services.AddScoped<ITarefaService, TarefaService>();
 
+builder.Services.AddScoped<IHistoricoTarefaRepository, HistoricoTarefaRepository>();
+builder.Services.AddScoped<IHistoricoTarefaService, HistoricoTarefaService>();
+
 builder.Services.AddControllers();
 var app = builder.Build();
 

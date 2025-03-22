@@ -12,8 +12,8 @@ using TASKWAVE.API.Infrastructure.Data;
 namespace TASKWAVE.ENTITY.Migrations
 {
     [DbContext(typeof(TaskWaveContext))]
-    [Migration("20250315181814_EntityAdjustments")]
-    partial class EntityAdjustments
+    [Migration("20250322221831_HistoricalAdjustment")]
+    partial class HistoricalAdjustment
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -117,7 +117,6 @@ namespace TASKWAVE.ENTITY.Migrations
                         .HasColumnName("DATA_MUDANCA_TAREFA");
 
                     b.Property<string>("PrioridadeAnteriorTarefa")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("PRIORIDADE_ANTERIOR_TAREFA");
 
@@ -127,7 +126,6 @@ namespace TASKWAVE.ENTITY.Migrations
                         .HasColumnName("PRIORIDADE_ATUAL_TAREFA");
 
                     b.Property<string>("SituacaoAnteriorTarefa")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("SITUACAO_ANTERIOR_TAREFA");
 
