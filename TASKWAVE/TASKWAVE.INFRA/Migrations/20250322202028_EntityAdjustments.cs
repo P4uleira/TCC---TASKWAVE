@@ -34,6 +34,38 @@ namespace TASKWAVE.ENTITY.Migrations
                 nullable: true,
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "SITUACAO_ATUAL_TAREFA",
+                table: "TB_HISTORICO_TAREFA",
+                type: "int",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "SITUACAO_ANTERIOR_TAREFA",
+                table: "TB_HISTORICO_TAREFA",
+                type: "int",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "PRIORIDADE_ATUAL_TAREFA",
+                table: "TB_HISTORICO_TAREFA",
+                type: "int",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "PRIORIDADE_ANTERIOR_TAREFA",
+                table: "TB_HISTORICO_TAREFA",
+                type: "int",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
         }
 
         /// <inheritdoc />
@@ -67,6 +99,42 @@ namespace TASKWAVE.ENTITY.Migrations
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "SITUACAO_ATUAL_TAREFA",
+                table: "TB_HISTORICO_TAREFA",
+                type: "nvarchar(max)",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "int");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "SITUACAO_ANTERIOR_TAREFA",
+                table: "TB_HISTORICO_TAREFA",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(int),
+                oldType: "int",
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "PRIORIDADE_ATUAL_TAREFA",
+                table: "TB_HISTORICO_TAREFA",
+                type: "nvarchar(max)",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "int");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "PRIORIDADE_ANTERIOR_TAREFA",
+                table: "TB_HISTORICO_TAREFA",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(int),
+                oldType: "int",
                 oldNullable: true);
         }
     }

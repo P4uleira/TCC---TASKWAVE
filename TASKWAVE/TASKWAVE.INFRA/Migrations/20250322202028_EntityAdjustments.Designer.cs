@@ -12,7 +12,7 @@ using TASKWAVE.API.Infrastructure.Data;
 namespace TASKWAVE.ENTITY.Migrations
 {
     [DbContext(typeof(TaskWaveContext))]
-    [Migration("20250315181814_EntityAdjustments")]
+    [Migration("20250322202028_EntityAdjustments")]
     partial class EntityAdjustments
     {
         /// <inheritdoc />
@@ -116,24 +116,20 @@ namespace TASKWAVE.ENTITY.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DATA_MUDANCA_TAREFA");
 
-                    b.Property<string>("PrioridadeAnteriorTarefa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int?>("PrioridadeAnteriorTarefa")
+                        .HasColumnType("int")
                         .HasColumnName("PRIORIDADE_ANTERIOR_TAREFA");
 
-                    b.Property<string>("PrioridadeAtualTarefa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int>("PrioridadeAtualTarefa")
+                        .HasColumnType("int")
                         .HasColumnName("PRIORIDADE_ATUAL_TAREFA");
 
-                    b.Property<string>("SituacaoAnteriorTarefa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int?>("SituacaoAnteriorTarefa")
+                        .HasColumnType("int")
                         .HasColumnName("SITUACAO_ANTERIOR_TAREFA");
 
-                    b.Property<string>("SituacaoAtualTarefa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int>("SituacaoAtualTarefa")
+                        .HasColumnType("int")
                         .HasColumnName("SITUACAO_ATUAL_TAREFA");
 
                     b.Property<int>("TarefaID")
