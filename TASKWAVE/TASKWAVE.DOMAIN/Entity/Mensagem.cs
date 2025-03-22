@@ -11,11 +11,11 @@
         {
         }
 
-        public Mensagem(int idMensagem, string conteudoMensagem, DateTime dataEnvioMensagem)
+        public Mensagem(string conteudoMensagem, DateTime dataEnvioMensagem, int tarefaID)
         {
-            IdMensagem = idMensagem;
             ConteudoMensagem = conteudoMensagem;
             DataEnvioMensagem = dataEnvioMensagem;
+            TarefaID = tarefaID;
         }
     }
 }
