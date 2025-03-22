@@ -13,9 +13,14 @@ namespace TASKWAVE.DOMAIN.Services
             _taskHistoryRepository = taskHistoryRepository;
         }
 
-        public async Task InsertTaskHistory(HistoricoTarefa taskHistory, int idTask)
+        public async Task InsertTaskHistory(HistoricoTarefa taskHistory)
         {
-            await _taskHistoryRepository.InsertTaskHistory(taskHistory, idTask);
+            await _taskHistoryRepository.InsertTaskHistory(taskHistory);
+        }
+
+        public async Task UpdateTaskHistory(HistoricoTarefa taskUpdate)
+        {
+            await _taskHistoryRepository.UpdateTaskHistory(taskUpdate);
         }
     }
 }
