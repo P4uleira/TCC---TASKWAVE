@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using TASKWAVE.API.Infrastructure.Data;
+using TASKWAVE.INFRA.Data;
 using TASKWAVE.DOMAIN.Interfaces.Repositories;
 
 namespace TASKWAVE.INFRA.Repositories

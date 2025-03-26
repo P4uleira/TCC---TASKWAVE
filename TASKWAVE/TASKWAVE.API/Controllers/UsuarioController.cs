@@ -1,7 +1,5 @@
-﻿using Azure;
-using Azure.Core;
-using Microsoft.AspNetCore.Mvc;
-using TASKWAVE.API.Infrastructure.Model;
+﻿using Microsoft.AspNetCore.Mvc;
+using TASKWAVE.DOMAIN.ENTITY;
 using TASKWAVE.API.Requests;
 using TASKWAVE.API.Responses;
 using TASKWAVE.DOMAIN.Interfaces.Services;

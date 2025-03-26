@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using TASKWAVE.API.Infrastructure.Data;
-using TASKWAVE.API.Infrastructure.Model;
+using TASKWAVE.INFRA.Data;
+using TASKWAVE.DOMAIN.ENTITY;
 using TASKWAVE.DOMAIN.Enums;
 using TASKWAVE.DOMAIN.Interfaces.Repositories;
 

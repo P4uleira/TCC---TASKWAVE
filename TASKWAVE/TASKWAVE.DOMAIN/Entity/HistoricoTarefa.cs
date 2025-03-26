@@ -1,6 +1,6 @@
 ﻿using TASKWAVE.DOMAIN.Enums;
 
-namespace TASKWAVE.API.Infrastructure.Model
+namespace TASKWAVE.DOMAIN.ENTITY
 {
     public class HistoricoTarefa
     {

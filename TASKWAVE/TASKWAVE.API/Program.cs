@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using TASKWAVE.API.Infrastructure.Data;
 using TASKWAVE.DOMAIN.Interfaces.Repositories;
 using TASKWAVE.DOMAIN.Interfaces.Services;
 using TASKWAVE.DOMAIN.Services;
+using TASKWAVE.INFRA.Data;
 using TASKWAVE.INFRA.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);

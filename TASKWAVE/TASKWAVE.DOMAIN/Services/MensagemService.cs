@@ -1,4 +1,4 @@
-﻿using TASKWAVE.API.Infrastructure.Model;
+﻿using TASKWAVE.DOMAIN.ENTITY;
 using TASKWAVE.DOMAIN.Interfaces.Repositories;
 using TASKWAVE.DOMAIN.Interfaces.Services;
 

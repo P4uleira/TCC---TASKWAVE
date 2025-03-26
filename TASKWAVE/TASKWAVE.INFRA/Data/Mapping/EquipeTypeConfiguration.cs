@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TASKWAVE.API.Infrastructure.Model;
+using TASKWAVE.DOMAIN.ENTITY;
 
-namespace TASKWAVE.API.Infrastructure.Data.Mapping
+namespace TASKWAVE.INFRA.Data.Mapping
 {
     internal class EquipeTypeConfiguration : IEntityTypeConfiguration<Equipe>
     {

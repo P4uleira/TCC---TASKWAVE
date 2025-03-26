@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TASKWAVE.API.Infrastructure.Data;
-using TASKWAVE.API.Infrastructure.Model;
+using TASKWAVE.INFRA.Data;
+using TASKWAVE.DOMAIN.ENTITY;
 using TASKWAVE.DOMAIN.Interfaces.Repositories;
 
 

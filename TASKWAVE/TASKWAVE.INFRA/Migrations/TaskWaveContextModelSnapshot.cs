@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TASKWAVE.API.Infrastructure.Data;
+using TASKWAVE.INFRA.Data;
 
 #nullable disable
 
-namespace TASKWAVE.ENTITY.Migrations
+namespace TASKWAVE.INFRA.Data.Migrations
 {
     [DbContext(typeof(TaskWaveContext))]
     partial class TaskWaveContextModelSnapshot : ModelSnapshot

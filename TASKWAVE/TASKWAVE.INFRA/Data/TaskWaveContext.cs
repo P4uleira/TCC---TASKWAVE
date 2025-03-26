@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using TASKWAVE.API.Infrastructure.Model;
+using TASKWAVE.DOMAIN.ENTITY;
 
 
-namespace TASKWAVE.API.Infrastructure.Data
+namespace TASKWAVE.INFRA.Data
 {
     public class TaskWaveContext : DbContext
     {
