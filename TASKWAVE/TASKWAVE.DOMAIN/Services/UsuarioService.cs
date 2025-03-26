@@ -18,9 +18,9 @@ namespace TASKWAVE.DOMAIN.Services
             await _usuarioRepository.AddAsync(usuario);
         }
 
-        public async Task CreateUserToEquip(Usuario usuario, int idEquipe)
+        public async Task CreateUserToEquip(Usuario usuario, int teamId)
         {
-            await _usuarioRepository.CreateUserToEquip(usuario, idEquipe);
+            await _usuarioRepository.CreateUserToEquip(usuario, teamId);
         }
         public async Task UpdateUsuario(Usuario usuario)
         {

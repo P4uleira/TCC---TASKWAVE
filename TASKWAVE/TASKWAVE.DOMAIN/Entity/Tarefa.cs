@@ -21,14 +21,14 @@ namespace TASKWAVE.DOMAIN.ENTITY
         {
         }
 
-        public Tarefa(string nomeTarefa, string? descricaoTarefa, SituacaoTarefaEnum situacaoTarefa, PrioridadeTarefaEnum prioridadeTarefa, DateTime dataCriacaoTarefa, int projetoId)
+        public Tarefa(string taskName, string? taskDescription, SituacaoTarefaEnum taskStatus, PrioridadeTarefaEnum taskPriority, DateTime taskCreationDate, int projectId)
         {
-            NomeTarefa = nomeTarefa;
-            DescricaoTarefa = descricaoTarefa;
-            SituacaoTarefa = situacaoTarefa;
-            PrioridadeTarefa = prioridadeTarefa;
-            DataCriacaoTarefa = dataCriacaoTarefa;
-            ProjetoId = projetoId;
+            NomeTarefa = taskName;
+            DescricaoTarefa = taskDescription;
+            SituacaoTarefa = taskStatus;
+            PrioridadeTarefa = taskPriority;
+            DataCriacaoTarefa = taskCreationDate;
+            ProjetoId = projectId;
         }
     }
 }

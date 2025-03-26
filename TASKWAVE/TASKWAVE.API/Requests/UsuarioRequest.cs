@@ -1,4 +1,4 @@
 ﻿namespace TASKWAVE.API.Requests
 {
-    public record UsuarioRequest(string nomeUsuario, string emailUsuario, string senhaUsuario, DateTime dataCriacaoUsuario);
+    public record UsuarioRequest(string userName, string userEmail, string userPassword, DateTime userCreationDate);
 }

@@ -6,36 +6,36 @@ namespace TASKWAVE.DOMAIN.Services
 {
     public class SetorService : ISetorService
     {
-        private readonly ISetorRepository _setorRepository;
+        private readonly ISetorRepository _sectorRepository;
 
-        public SetorService(ISetorRepository setorRepository)
+        public SetorService(ISetorRepository sectorRepository)
         {
-            _setorRepository = setorRepository;
+            _sectorRepository = sectorRepository;
         }
 
-        public async Task CreateSetor(Setor setor)
+        public async Task CreateSector(Setor sector)
         {
-            await _setorRepository.AddAsync(setor);
+            await _sectorRepository.AddAsync(sector);
         }
 
-        public async Task UpdateSetor(Setor setor)
+        public async Task UpdateSector(Setor sector)
         {
-            await _setorRepository.UpdateAsync(setor);
+            await _sectorRepository.UpdateAsync(sector);
         }
 
-        public async Task DeleteSetor(int id)
+        public async Task DeleteSector(int idSector)
         {
-            await _setorRepository.DeleteAsync(id);
+            await _sectorRepository.DeleteAsync(idSector);
         }
 
-        public async Task<IEnumerable<Setor>> GetAllSetores()
+        public async Task<IEnumerable<Setor>> GetAllSectors()
         {
-            return await _setorRepository.GetAllAsync();
+            return await _sectorRepository.GetAllAsync();
         }
 
-        public async Task<Setor> GetSetorById(int id)
+        public async Task<Setor> GetSectorById(int idSector)
         {
-            return await _setorRepository.GetByIdAsync(id);
+            return await _sectorRepository.GetByIdAsync(idSector);
         }
     }
 }

@@ -4,10 +4,11 @@ namespace TASKWAVE.DOMAIN.Interfaces.Services
 {
     public interface ISetorService
     {
-        Task CreateSetor(Setor setor);
-        Task UpdateSetor(Setor setor);
-        Task DeleteSetor(int id);
-        Task<IEnumerable<Setor>> GetAllSetores();
-        Task<Setor> GetSetorById(int id);
+        Task CreateSector(Setor sector);
+        Task UpdateSector(Setor sector);
+        Task DeleteSector(int idSector);
+        Task<IEnumerable<Setor>> GetAllSectors();
+        Task<Setor> GetSectorById(int idSector);
+
     }
 }

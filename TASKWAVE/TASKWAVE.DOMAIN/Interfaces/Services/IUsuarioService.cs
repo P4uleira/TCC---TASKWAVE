@@ -9,6 +9,6 @@ namespace TASKWAVE.DOMAIN.Interfaces.Services
         Task DeleteUsuario(int id);
         Task<IEnumerable<Usuario>> GetAllUsuarios();
         Task<Usuario> GetUsuarioById(int id);
-        Task CreateUserToEquip(Usuario usuario, int idEquipe);
+        Task CreateUserToEquip(Usuario usuario, int teamId);
     }
 }

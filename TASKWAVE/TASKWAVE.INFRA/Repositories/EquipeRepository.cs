@@ -14,66 +14,64 @@ namespace TASKWAVE.INFRA.Repositories
         {
             _context = context;
         }
-        public async Task AddAsync(Equipe entity)
+        public async Task AddAsync(Equipe team)
         {
-            await _context.Equipes.AddAsync(entity);
+            await _context.Equipes.AddAsync(team);
             await _context.SaveChangesAsync();
         }
 
-        public async Task InsertProjectToEquip(int idProjeto, int idEquipe)
+        public async Task InsertProjectToTeam(int idProject, int idTeam)
         {
-            var equipe = await _context.Equipes
-            .Include(e => e.Projetos) // Garante que a coleção Projetos seja carregada
-            .FirstOrDefaultAsync(e => e.IdEquipe == idEquipe);
+            var team = await _context.Equipes
+            .Include(e => e.Projetos)
+            .FirstOrDefaultAsync(e => e.IdEquipe == idTeam);
 
-            var projeto = await _context.Projetos.FindAsync(idProjeto);
+            var project = await _context.Projetos.FindAsync(idProject);
 
-            if (equipe == null || projeto == null)
+            if (team == null || project == null)
             {
                 throw new Exception("Equipe ou Projeto não encontrados.");
             }
 
-            // Verifica se já existe essa relação para evitar duplicatas
-            if (!equipe.Projetos.Any(p => p.IdProjeto == idProjeto))
+            if (!team.Projetos.Any(p => p.IdProjeto == idProject))
             {
-                equipe.Projetos.Add(projeto); // Adiciona o projeto à equipe
-                await _context.SaveChangesAsync(); // Salva as alterações no banco
+                team.Projetos.Add(project);
+                await _context.SaveChangesAsync();
             }
         }
 
-        public async Task InsertUserToEquip(int idUsuario, int idEquipe)
+        public async Task InsertUserToTeam(int idUser, int idTeam)
         {
-            var equipe = await _context.Equipes
-            .Include(e => e.Usuarios) // Garante que a coleção Projetos seja carregada
-            .FirstOrDefaultAsync(e => e.IdEquipe == idEquipe);
+            var team = await _context.Equipes
+            .Include(e => e.Usuarios)
+            .FirstOrDefaultAsync(e => e.IdEquipe == idTeam);
 
-            var usuario = await _context.Usuarios.FindAsync(idUsuario);
+            var user = await _context.Usuarios.FindAsync(idUser);
 
-            if (equipe == null || usuario == null)
+            if (team == null || user == null)
             {
                 throw new Exception("Equipe ou Usuario não encontrados.");
             }
 
-            // Verifica se já existe essa relação para evitar duplicatas
-            if (!equipe.Usuarios.Any(p => p.IdUsuario == idUsuario))
+            if (!team.Usuarios.Any(p => p.IdUsuario == idUser))
             {
-                equipe.Usuarios.Add(usuario); // Adiciona o usuario à equipe
-                await _context.SaveChangesAsync(); // Salva as alterações no banco
+                team.Usuarios.Add(user);
+                await _context.SaveChangesAsync();
             }
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(int idTeam)
         {
-            var equipe = await _context.Equipes.FindAsync(id);
-            if (equipe != null)
+            var team = await _context.Equipes.FindAsync(idTeam);
+            if (team != null)
             {
-                _context.Equipes.Remove(equipe);
+                _context.Equipes.Remove(team);
                 _context.SaveChanges();
             }
         }
-        public async Task UpdateAsync(Equipe entity)
+        public async Task UpdateAsync(Equipe team)
         {
-            _context.Equipes.Update(entity);
+            _context.Equipes.Update(team);
             await _context.SaveChangesAsync();
         }
 
@@ -82,9 +80,9 @@ namespace TASKWAVE.INFRA.Repositories
             return await _context.Equipes.ToListAsync();
         }
 
-        public async Task<Equipe> GetByIdAsync(int id)
+        public async Task<Equipe> GetByIdAsync(int idTeam)
         {
-            return await _context.Equipes.FindAsync(id);
+            return await _context.Equipes.FindAsync(idTeam);
         }
 
     }

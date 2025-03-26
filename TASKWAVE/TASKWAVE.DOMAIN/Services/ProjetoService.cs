@@ -6,42 +6,41 @@ namespace TASKWAVE.DOMAIN.Services
 {
     public class ProjetoService : IProjetoService
     {
-        private readonly IProjetoRepository _projetoRepository;
-        private readonly IEquipeRepository _equipeRepository;
+        private readonly IProjetoRepository _projectRepository;
 
-        public ProjetoService(IProjetoRepository projetoRepository)
+        public ProjetoService(IProjetoRepository projectRepository)
         {
-            _projetoRepository = projetoRepository;
+            _projectRepository = projectRepository;
         }
 
-        public async Task CreateProjeto(Projeto projeto)
+        public async Task CreateProject(Projeto project)
         {
-            await _projetoRepository.AddAsync(projeto);
+            await _projectRepository.AddAsync(project);
         }
 
-        public async Task CreateProjectToEquip(Projeto projeto, int idEquipe)
+        public async Task CreateProjectToTeam(Projeto project, int teamId)
         {
-            await _projetoRepository.CreateProjectToEquip(projeto, idEquipe);
+            await _projectRepository.CreateProjectToTeam(project, teamId);
         }
 
-        public async Task UpdateProjeto(Projeto projeto)
+        public async Task UpdateProject(Projeto project)
         {
-            await _projetoRepository.UpdateAsync(projeto);
+            await _projectRepository.UpdateAsync(project);
         }
 
-        public async Task DeleteProjeto(int id)
+        public async Task DeleteProject(int idProject)
         {
-            await _projetoRepository.DeleteAsync(id);
+            await _projectRepository.DeleteAsync(idProject);
         }
 
-        public async Task<IEnumerable<Projeto>> GetAllProjetos()
+        public async Task<IEnumerable<Projeto>> GetAllProjects()
         {
-            return await _projetoRepository.GetAllAsync();
+            return await _projectRepository.GetAllAsync();
         }
 
-        public async Task<Projeto> GetProjetoById(int id)
+        public async Task<Projeto> GetProjectById(int idProject)
         {
-            return await _projetoRepository.GetByIdAsync(id);
+            return await _projectRepository.GetByIdAsync(idProject);
         }
     }
 }

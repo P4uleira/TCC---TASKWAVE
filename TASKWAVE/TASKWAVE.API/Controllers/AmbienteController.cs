@@ -3,6 +3,7 @@ using TASKWAVE.DOMAIN.ENTITY;
 using TASKWAVE.API.Requests;
 using TASKWAVE.API.Responses;
 using TASKWAVE.DOMAIN.Interfaces.Services;
+using System;
 
 namespace TASKWAVE.API.Controllers
 {
@@ -10,60 +11,60 @@ namespace TASKWAVE.API.Controllers
     [ApiController]
     public class AmbienteController : ControllerBase
     {
-        private readonly IAmbienteService _ambienteService;
+        private readonly IAmbienteService _environmentService;
 
-        public AmbienteController(IAmbienteService ambienteService)
+        public AmbienteController(IAmbienteService environmentService)
         {
-            _ambienteService = ambienteService;
+            _environmentService = environmentService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AmbienteResponse>>> GetAll()
         {
-            var ambientes = await _ambienteService.GetAllAmbientes();
-            var response = ambientes.Select(ambiente => new AmbienteResponse(ambiente.NomeAmbiente, ambiente.DescricaoAmbiente));
+            var environments = await _environmentService.GetAllEnvironments();
+            var response = environments.Select(environment => new AmbienteResponse(environment.NomeAmbiente, environment.DescricaoAmbiente));
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<AmbienteResponse>> GetById(int id)
+        [HttpGet("{idEnvironment}")]
+        public async Task<ActionResult<AmbienteResponse>> GetById(int idEnvironment)
         {
-            var ambiente = await _ambienteService.GetAmbienteById(id);
-            if (ambiente == null)
+            var environment = await _environmentService.GetEnvironmentById(idEnvironment);
+            if (environment == null)
                 return NotFound();
-            return Ok(new AmbienteResponse(ambiente.NomeAmbiente, ambiente.DescricaoAmbiente));
+            return Ok(new AmbienteResponse(environment.NomeAmbiente, environment.DescricaoAmbiente));
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(AmbienteRequest request)
+        public async Task<ActionResult> Create(AmbienteRequest environmentRequest)
         {
-            var ambiente = new Ambiente(request.nomeAmbiente, request.descricaoAmbiente);
-            await _ambienteService.CreateAmbiente(ambiente);
-            return CreatedAtAction(nameof(GetById), new { id = ambiente.IdAmbiente }, null);
+            var environment = new Ambiente(environmentRequest.environmentName, environmentRequest.environmentDescription);
+            await _environmentService.CreateEnvironment(environment);
+            return CreatedAtAction(nameof(GetById), new { id = environment.IdAmbiente }, _environmentService.GetEnvironmentById(environment.IdAmbiente));
         }
 
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, AmbienteRequest request)
+        [HttpPut("{idEnvironment}")]
+        public async Task<ActionResult> Update(int idEnvironment, AmbienteRequest environmentRequest)
         {
 
-            var ambienteExistente = await _ambienteService.GetAmbienteById(id);
-            if (ambienteExistente == null)
+            var existingEnvironment = await _environmentService.GetEnvironmentById(idEnvironment);
+            if (existingEnvironment == null)
             {
                 return NotFound();
             }
 
-            ambienteExistente.NomeAmbiente = request.nomeAmbiente;
-            ambienteExistente.DescricaoAmbiente = request.descricaoAmbiente;
+            existingEnvironment.NomeAmbiente = environmentRequest.environmentName;
+            existingEnvironment.DescricaoAmbiente = environmentRequest.environmentDescription;
             
-            await _ambienteService.UpdateAmbiente(ambienteExistente);
+            await _environmentService.UpdateEnvironment(existingEnvironment);
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        [HttpDelete("{idEnvironment}")]
+        public async Task<ActionResult> Delete(int idEnvironment)
         {
-            await _ambienteService.DeleteAmbiente(id);
+            await _environmentService.DeleteEnvironment(idEnvironment);
             return NoContent();
         }
     }

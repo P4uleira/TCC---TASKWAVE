@@ -11,73 +11,73 @@ namespace TASKWAVE.API.Controllers
     [ApiController]
     public class EquipeController : ControllerBase
     {
-        private readonly IEquipeService _equipeService;
+        private readonly IEquipeService _teamService;
 
-        public EquipeController(IEquipeService equipeService)
+        public EquipeController(IEquipeService teamService)
         {
-            _equipeService = equipeService;
+            _teamService = teamService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EquipeResponse>>> GetAll()
         {
-            var equipes = await _equipeService.GetAllEquipes();
-            var response = equipes.Select(equipe => new EquipeResponse(equipe.NomeEquipe, equipe.DescricaoEquipe, equipe.SetorId));
+            var teams = await _teamService.GetAllTeams();
+            var response = teams.Select(team => new EquipeResponse(team.NomeEquipe, team.DescricaoEquipe, team.SetorId));
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<EquipeResponse>> GetById(int id)
+        [HttpGet("{idTeam}")]
+        public async Task<ActionResult<EquipeResponse>> GetById(int idTeam)
         {
-            var equipe = await _equipeService.GetEquipeById(id);
-            if (equipe == null)
+            var team = await _teamService.GetTeamById(idTeam);
+            if (team == null)
                 return NotFound();
-            return Ok(new EquipeResponse(equipe.NomeEquipe, equipe.DescricaoEquipe, equipe.SetorId));
+            return Ok(new EquipeResponse(team.NomeEquipe, team.DescricaoEquipe, team.SetorId));
         }
 
-        [HttpPost("AddProjectToEquipe/{idEquipe}/{idProjeto}")]
-        public async Task InsertProjectToEquip(int idEquipe, int idProjeto)
+        [HttpPost("AddProjectToTeam/{TeamId}/{ProjectId}")]
+        public async Task InsertProjectToTeam(int TeamId, int ProjectId)
         {
-            await _equipeService.InsertProjectToEquip(idProjeto, idEquipe);
+            await _teamService.InsertProjectToTeam(ProjectId, TeamId);
         }
 
-        [HttpPost("AddUserToEquipe/{idEquipe}/{idUsuario}")]
-        public async Task InsertUserToEquip(int idEquipe, int idUsuario)
+        [HttpPost("AddUserToTeam/{TeamId}/{userId}")]
+        public async Task InsertUserToTeam(int TeamId, int userId)
         {
-            await _equipeService.InsertUserToEquip(idUsuario, idEquipe);
+            await _teamService.InsertUserToTeam(userId, TeamId);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(EquipeRequest request)
+        public async Task<ActionResult> Create(EquipeRequest teamRequest)
         {
-            var equipe = new Equipe(request.nomeEquipe, request.descricaoEquipe, request.idSetor);
-            await _equipeService.CreateEquipe(equipe);
-            return CreatedAtAction(nameof(GetById), new { id = equipe.IdEquipe }, null);
+            var team = new Equipe(teamRequest.teamName, teamRequest.teamDescription, teamRequest.sectorId);
+            await _teamService.CreateTeam(team);
+            return CreatedAtAction(nameof(GetById), new { idTeam = team.IdEquipe }, null);
         }
 
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, EquipeRequest request)
+        [HttpPut("{idTeam}")]
+        public async Task<ActionResult> Update(int idTeam, EquipeRequest teamRequest)
         {
 
-            var equipeExiste = await _equipeService.GetEquipeById(id);
-            if (equipeExiste == null)
+            var teamExists = await _teamService.GetTeamById(idTeam);
+            if (teamExists == null)
             {
                 return NotFound();
             }
 
-            equipeExiste.NomeEquipe = request.nomeEquipe;
-            equipeExiste.DescricaoEquipe = request.descricaoEquipe;
-            equipeExiste.SetorId = request.idSetor;
+            teamExists.NomeEquipe = teamRequest.teamName;
+            teamExists.DescricaoEquipe = teamRequest.teamDescription;
+            teamExists.SetorId = teamRequest.sectorId;
 
-            await _equipeService.UpdateEquipe(equipeExiste);
+            await _teamService.UpdateTeam(teamExists);
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        [HttpDelete("{idTeam}")]
+        public async Task<ActionResult> Delete(int idTeam)
         {
-            await _equipeService.DeleteEquipe(id);
+            await _teamService.DeleteTeam(idTeam);
             return NoContent();
         }
     }

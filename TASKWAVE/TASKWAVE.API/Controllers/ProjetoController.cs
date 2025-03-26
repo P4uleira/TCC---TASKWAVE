@@ -10,66 +10,66 @@ namespace TASKWAVE.API.Controllers
     [ApiController]
     public class ProjetoController : ControllerBase
     {
-        private readonly IProjetoService _projetoService;
+        private readonly IProjetoService _projectService;
 
-        public ProjetoController(IProjetoService projetoService)
+        public ProjetoController(IProjetoService projectService)
         {
-            _projetoService = projetoService;
+            _projectService = projectService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProjetoResponse>>> GetAll()
         {
-            var projetos = await _projetoService.GetAllProjetos();
-            var response = projetos.Select(projeto => new ProjetoResponse(projeto.NomeProjeto, projeto.DescricaoProjeto, projeto.DataCriacaoProjeto));
+            var projetos = await _projectService.GetAllProjects();
+            var response = projetos.Select(project => new ProjetoResponse(project.NomeProjeto, project.DescricaoProjeto, project.DataCriacaoProjeto));
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ProjetoResponse>> GetById(int id)
+        [HttpGet("{idProject}")]
+        public async Task<ActionResult<ProjetoResponse>> GetById(int idProject)
         {
-            var projeto = await _projetoService.GetProjetoById(id);
-            if (projeto == null)
+            var project = await _projectService.GetProjectById(idProject);
+            if (project == null)
                 return NotFound();
-            return Ok(new ProjetoResponse(projeto.NomeProjeto, projeto.DescricaoProjeto, projeto.DataCriacaoProjeto));
+            return Ok(new ProjetoResponse(project.NomeProjeto, project.DescricaoProjeto, project.DataCriacaoProjeto));
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(ProjetoRequest request)
+        public async Task<ActionResult> Create(ProjetoRequest projectRequest)
         {
-            var projeto = new Projeto(request.nomeProjeto, request.descricaoProjeto, request.dataCriacaoProjeto);
-            await _projetoService.CreateProjeto(projeto);
-            return CreatedAtAction(nameof(GetById), new { id = projeto.IdProjeto }, null);
+            var project = new Projeto(projectRequest.projectName, projectRequest.projectDescription, projectRequest.projectCreationDate);
+            await _projectService.CreateProject(project);
+            return CreatedAtAction(nameof(GetById), new { idProject = project.IdProjeto }, null);
         }
 
-        [HttpPost("AddProjectInEquip")]
-        public async Task CreateProjectToEquip(ProjetoRequest projeto, int idEquipe)
+        [HttpPost("AddProjectInTeam")]
+        public async Task CreateProjectToTeam(ProjetoRequest project, int teamId)
         {
-            var newProjeto = new Projeto(projeto.nomeProjeto, projeto.descricaoProjeto, projeto.dataCriacaoProjeto);
-            await _projetoService.CreateProjectToEquip(newProjeto, idEquipe);
+            var newProject = new Projeto(project.projectName, project.projectDescription, project.projectCreationDate);
+            await _projectService.CreateProjectToTeam(newProject, teamId);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, ProjetoRequest request)
+        [HttpPut("{idProject}")]
+        public async Task<ActionResult> Update(int idProject, ProjetoRequest projectRequest)
         {
 
-            var projetoExistente = await _projetoService.GetProjetoById(id);
-            if (projetoExistente == null)
+            var existingProject = await _projectService.GetProjectById(idProject);
+            if (existingProject == null)
             {
                 return NotFound();
             }
 
-            projetoExistente.NomeProjeto = request.nomeProjeto;
-            projetoExistente.DescricaoProjeto = request.descricaoProjeto;
+            existingProject.NomeProjeto = projectRequest.projectName;
+            existingProject.DescricaoProjeto = projectRequest.projectDescription;
 
-            await _projetoService.UpdateProjeto(projetoExistente);
+            await _projectService.UpdateProject(existingProject);
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        [HttpDelete("{idProject}")]
+        public async Task<ActionResult> Delete(int idProject)
         {
-            await _projetoService.DeleteProjeto(id);
+            await _projectService.DeleteProject(idProject);
             return NoContent();
         }
     }

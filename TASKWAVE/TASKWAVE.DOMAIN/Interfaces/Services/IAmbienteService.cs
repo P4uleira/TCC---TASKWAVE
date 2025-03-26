@@ -4,10 +4,10 @@ namespace TASKWAVE.DOMAIN.Interfaces.Services
 {
     public interface IAmbienteService
     {
-        Task CreateAmbiente(Ambiente ambiente);
-        Task UpdateAmbiente(Ambiente ambiente);
-        Task DeleteAmbiente(int id);
-        Task<IEnumerable<Ambiente>> GetAllAmbientes();
-        Task<Ambiente> GetAmbienteById(int id);
+        Task CreateEnvironment(Ambiente environment);
+        Task UpdateEnvironment(Ambiente environment);
+        Task DeleteEnvironment(int idEnvironment);
+        Task<IEnumerable<Ambiente>> GetAllEnvironments();
+        Task<Ambiente> GetEnvironmentById(int idEnvironment);
     }
 }

@@ -1,4 +1,4 @@
 ﻿namespace TASKWAVE.API.Requests
 {
-    public record EquipeRequest(string nomeEquipe, string descricaoEquipe, int idSetor);
+    public record EquipeRequest(string teamName, string teamDescription, int sectorId);
 }

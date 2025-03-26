@@ -2,5 +2,5 @@
 
 namespace TASKWAVE.API.Responses
 {
-    public record TarefaResponse(string nomeTarefa, string descricaoTarefa, SituacaoTarefaEnum situacaoTarefa, PrioridadeTarefaEnum prioridadeTarefa, DateTime dataCriacaoTarefa, int projetoId);
+    public record TarefaResponse(string taskName, string taskDescription, SituacaoTarefaEnum taskStatus, PrioridadeTarefaEnum taskPriority, DateTime taskCreationDate, int projectId);
 }

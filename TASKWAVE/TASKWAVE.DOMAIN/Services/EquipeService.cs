@@ -6,50 +6,46 @@ namespace TASKWAVE.DOMAIN.Services
 {
     public class EquipeService : IEquipeService
     {
-        private readonly IEquipeRepository _equipeRepository;
+        private readonly IEquipeRepository _teamRepository;
 
-        public EquipeService(IEquipeRepository equipeRepository)
+        public EquipeService(IEquipeRepository teamRepository)
         {
-            _equipeRepository = equipeRepository;
+            _teamRepository = teamRepository;
         }
 
-        public async Task CreateEquipe(Equipe equipe)
+        public async Task CreateTeam(Equipe team)
         {
-            await _equipeRepository.AddAsync(equipe);
+            await _teamRepository.AddAsync(team);
         }
 
-        public async Task UpdateEquipe(Equipe equipe)
+        public async Task UpdateTeam(Equipe team)
         {
-            await _equipeRepository.UpdateAsync(equipe);
+            await _teamRepository.UpdateAsync(team);
         }
 
-        public async Task InsertProjectToEquip(int idProjeto, int idEquipe)
+        public async Task InsertProjectToTeam(int idProject, int idTeam)
         {
-            await _equipeRepository.InsertProjectToEquip(idProjeto, idEquipe);
+            await _teamRepository.InsertProjectToTeam(idProject, idTeam);
         }
 
-        public async Task InsertUserToEquip(int idUsuario, int idEquipe)
+        public async Task InsertUserToTeam(int idUser, int idTeam)
         {
-            await _equipeRepository.InsertUserToEquip(idUsuario, idEquipe);
+            await _teamRepository.InsertUserToTeam(idUser, idTeam);
         }
-        public async Task DeleteEquipe(int id)
+        public async Task DeleteTeam(int idTeam)
         {
-            await _equipeRepository.DeleteAsync(id);
-        }
-
-        public async Task<IEnumerable<Equipe>> GetAllEquipes()
-        {
-            return await _equipeRepository.GetAllAsync();
+            await _teamRepository.DeleteAsync(idTeam);
         }
 
-        public async Task<Equipe> GetEquipeById(int id)
+        public async Task<IEnumerable<Equipe>> GetAllTeams()
         {
-            return await _equipeRepository.GetByIdAsync(id);
+            return await _teamRepository.GetAllAsync();
         }
 
-        public async Task SetProjectEquipe(int idEquipe, int idProjeto)
+        public async Task<Equipe> GetTeamById(int idTeam)
         {
-
+            return await _teamRepository.GetByIdAsync(idTeam);
         }
+
     }
 }

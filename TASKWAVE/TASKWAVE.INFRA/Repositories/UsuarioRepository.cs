@@ -20,14 +20,14 @@ namespace TASKWAVE.INFRA.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task CreateUserToEquip(Usuario entity, int idEquipe)
+        public async Task CreateUserToEquip(Usuario entity, int teamId)
         {
             await _context.Usuarios.AddAsync(entity);
             await _context.SaveChangesAsync();
 
             var equipes = await _context.Equipes
             .Include(equipe => equipe.Usuarios)
-            .FirstOrDefaultAsync(equipe => equipe.IdEquipe == idEquipe);
+            .FirstOrDefaultAsync(equipe => equipe.IdEquipe == teamId);
 
             var usuario = await _context.Usuarios.FindAsync(entity.IdUsuario);
 

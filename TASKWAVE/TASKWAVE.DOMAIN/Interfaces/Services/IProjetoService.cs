@@ -4,12 +4,12 @@ namespace TASKWAVE.DOMAIN.Interfaces.Services
 {
     public interface IProjetoService
     {
-        Task CreateProjeto(Projeto projeto);
-        Task UpdateProjeto(Projeto projeto);
-        Task DeleteProjeto(int id);
-        Task<IEnumerable<Projeto>> GetAllProjetos();
-        Task<Projeto> GetProjetoById(int id);
+        Task CreateProject(Projeto project);
+        Task UpdateProject(Projeto project);
+        Task DeleteProject(int idProject);
+        Task<IEnumerable<Projeto>> GetAllProjects();
+        Task<Projeto> GetProjectById(int idProject);
+        Task CreateProjectToTeam(Projeto project, int teamId);
 
-        Task CreateProjectToEquip(Projeto projeto, int idEquipe);
     }
 }

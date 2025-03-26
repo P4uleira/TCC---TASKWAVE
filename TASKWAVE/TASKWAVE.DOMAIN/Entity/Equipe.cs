@@ -15,11 +15,11 @@
         {
         }
 
-        public Equipe(string nomeEquipe, string? descricaoEquipe, int setorId)
+        public Equipe(string teamName, string? teamDescription, int sectorId)
         {
-            NomeEquipe = nomeEquipe;
-            DescricaoEquipe = descricaoEquipe;
-            SetorId = setorId;
+            NomeEquipe = teamName;
+            DescricaoEquipe = teamDescription;
+            SetorId = sectorId;
         }
     }
 }

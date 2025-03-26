@@ -1,4 +1,4 @@
 ﻿namespace TASKWAVE.API.Requests
 {
-    public record ProjetoRequest(string nomeProjeto, string descricaoProjeto, DateTime dataCriacaoProjeto);
+    public record ProjetoRequest(string projectName, string projectDescription, DateTime projectCreationDate);
 }

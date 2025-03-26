@@ -13,19 +13,19 @@
         {
         }
 
-        public Projeto(string nomeProjeto, string? descricaoProjeto, DateTime dataCriacaoProjeto)
+        public Projeto(string projectName, string? projectDescription, DateTime projectCreationDate)
         {
-            NomeProjeto = nomeProjeto;
-            DescricaoProjeto = descricaoProjeto;
-            DataCriacaoProjeto = dataCriacaoProjeto;
+            NomeProjeto = projectName;
+            DescricaoProjeto = projectDescription;
+            DataCriacaoProjeto = projectCreationDate;
         }
 
-        public Projeto(string nomeProjeto, string? descricaoProjeto, DateTime dataCriacaoProjeto, ICollection<Equipe> equipes)
+        public Projeto(string projectName, string? projectDescription, DateTime projectCreationDate, ICollection<Equipe> teams)
         {
-            NomeProjeto = nomeProjeto;
-            DescricaoProjeto = descricaoProjeto;
-            DataCriacaoProjeto = dataCriacaoProjeto;
-            Equipes = equipes;
+            NomeProjeto = projectName;
+            DescricaoProjeto = projectDescription;
+            DataCriacaoProjeto = projectCreationDate;
+            Equipes = teams;
         }
 
     }

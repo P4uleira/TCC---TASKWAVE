@@ -11,11 +11,11 @@
         {
         }
 
-        public Acesso(string nomeAcesso, string? descricaoAcesso, DateTime dataCriacaoAcesso)
+        public Acesso(string accessName, string? accessDescription, DateTime accessCreationDate)
         {
-            NomeAcesso = nomeAcesso;
-            DescricaoAcesso = descricaoAcesso;
-            DataCriacaoAcesso = dataCriacaoAcesso;
+            NomeAcesso = accessName;
+            DescricaoAcesso = accessDescription;
+            DataCriacaoAcesso = accessCreationDate;
         }
     }
 }

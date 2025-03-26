@@ -6,36 +6,36 @@ namespace TASKWAVE.DOMAIN.Services
 {
     public class AmbienteService : IAmbienteService
     {
-        private readonly IAmbienteRepository _ambienteRepository;
+        private readonly IAmbienteRepository _environmentRepository;
 
-        public AmbienteService(IAmbienteRepository ambienteRepository)
+        public AmbienteService(IAmbienteRepository environmentRepository)
         {
-            _ambienteRepository = ambienteRepository;
+            _environmentRepository = environmentRepository;
         }
 
-        public async Task CreateAmbiente(Ambiente ambiente)
+        public async Task CreateEnvironment(Ambiente environment)
         {
-            await _ambienteRepository.AddAsync(ambiente);
+            await _environmentRepository.AddAsync(environment);
         }
 
-        public async Task UpdateAmbiente(Ambiente ambiente)
+        public async Task UpdateEnvironment(Ambiente environment)
         {
-            await _ambienteRepository.UpdateAsync(ambiente);
+            await _environmentRepository.UpdateAsync(environment);
         }
 
-        public async Task DeleteAmbiente(int id)
+        public async Task DeleteEnvironment(int idEnvironment)
         {
-            await _ambienteRepository.DeleteAsync(id);
+            await _environmentRepository.DeleteAsync(idEnvironment);
         }
 
-        public async Task<IEnumerable<Ambiente>> GetAllAmbientes()
+        public async Task<IEnumerable<Ambiente>> GetAllEnvironments()
         {
-            return await _ambienteRepository.GetAllAsync();
+            return await _environmentRepository.GetAllAsync();
         }
 
-        public async Task<Ambiente> GetAmbienteById(int id)
+        public async Task<Ambiente> GetEnvironmentById(int idEnvironment)
         {
-            return await _ambienteRepository.GetByIdAsync(id);
+            return await _environmentRepository.GetByIdAsync(idEnvironment);
         }
     }
 }

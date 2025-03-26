@@ -16,10 +16,10 @@ namespace TASKWAVE.DOMAIN.ENTITY
         {
         }
 
-        public Setor(string nomeSetor, string? descricaoSetor, int ambienteId)
+        public Setor(string sectorName, string? sectorDescription, int ambienteId)
         {
-            NomeSetor = nomeSetor;
-            DescricaoSetor = descricaoSetor;
+            NomeSetor = sectorName;
+            DescricaoSetor = sectorDescription;
             AmbienteId = ambienteId;
         }
     }
