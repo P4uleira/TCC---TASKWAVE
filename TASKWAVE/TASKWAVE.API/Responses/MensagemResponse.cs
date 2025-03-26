@@ -1,4 +1,4 @@
 ﻿namespace TASKWAVE.API.Responses
 {
-    public record MensagemResponse(string ConteudoMensagem, DateTime DataEnvioMensagem, int TarefaID);
+    public record MensagemResponse(string messageContent, DateTime messageSentDate, int taskId);
 }

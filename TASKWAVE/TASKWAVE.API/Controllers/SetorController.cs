@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TASKWAVE.API.Infrastructure.Model;
+using TASKWAVE.DOMAIN.ENTITY;
 using TASKWAVE.API.Requests;
 using TASKWAVE.API.Responses;
 using TASKWAVE.DOMAIN.Interfaces.Services;
@@ -10,61 +10,61 @@ namespace TASKWAVE.API.Controllers
     [ApiController]
     public class SetorController : ControllerBase
     {
-        private readonly ISetorService _setorService;
+        private readonly ISetorService _sectorService;
 
-        public SetorController(ISetorService setorService)
+        public SetorController(ISetorService sectorService)
         {
-            _setorService = setorService;
+            _sectorService = sectorService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SetorResponse>>> GetAll()
         {
-            var setores = await _setorService.GetAllSetores();
-            var response = setores.Select(setor => new SetorResponse(setor.NomeSetor, setor.DescricaoSetor, setor.AmbienteId));
+            var sectors = await _sectorService.GetAllSectors();
+            var response = sectors.Select(sector => new SetorResponse(sector.NomeSetor, sector.DescricaoSetor, sector.AmbienteId));
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<SetorResponse>> GetById(int id)
+        [HttpGet("{idsector}")]
+        public async Task<ActionResult<SetorResponse>> GetById(int idSector)
         {
-            var setor = await _setorService.GetSetorById(id);
-            if (setor == null)
+            var sector = await _sectorService.GetSectorById(idSector);
+            if (sector == null)
                 return NotFound();
-            return Ok(new SetorResponse(setor.NomeSetor, setor.DescricaoSetor, setor.AmbienteId));
+            return Ok(new SetorResponse(sector.NomeSetor, sector.DescricaoSetor, sector.AmbienteId));
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(SetorRequest request)
+        public async Task<ActionResult> Create(SetorRequest sectorRequest)
         {
-            var setor = new Setor(request.nomeSetor, request.descricaoSetor, request.idAmbiente);
-            await _setorService.CreateSetor(setor);
-            return CreatedAtAction(nameof(GetById), new { id = setor.IdSetor }, null);
+            var sector = new Setor(sectorRequest.sectorName, sectorRequest.sectorDescription, sectorRequest.environmentId);
+            await _sectorService.CreateSector(sector);
+            return CreatedAtAction(nameof(GetById), new { idsector = sector.IdSetor }, null);
         }
 
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, SetorRequest request)
+        [HttpPut("{idSector}")]
+        public async Task<ActionResult> Update(int idSector, SetorRequest sectorRequest)
         {
 
-            var setorExistente = await _setorService.GetSetorById(id);
-            if (setorExistente == null)
+            var existingSector = await _sectorService.GetSectorById(idSector);
+            if (existingSector == null)
             {
                 return NotFound();
             }
 
-            setorExistente.NomeSetor = request.nomeSetor;
-            setorExistente.DescricaoSetor = request.descricaoSetor;
-            setorExistente.AmbienteId = request.idAmbiente;
+            existingSector.NomeSetor = sectorRequest.sectorName;
+            existingSector.DescricaoSetor = sectorRequest.sectorDescription;
+            existingSector.AmbienteId = sectorRequest.environmentId;
 
-            await _setorService.UpdateSetor(setorExistente);
+            await _sectorService.UpdateSector(existingSector);
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        [HttpDelete("{idSector}")]
+        public async Task<ActionResult> Delete(int idSector)
         {
-            await _setorService.DeleteSetor(id);
+            await _sectorService.DeleteSector(idSector);
             return NoContent();
         }
     }

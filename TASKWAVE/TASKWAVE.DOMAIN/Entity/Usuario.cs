@@ -1,4 +1,4 @@
-﻿namespace TASKWAVE.API.Infrastructure.Model
+﻿namespace TASKWAVE.DOMAIN.ENTITY
 {
     public class Usuario
     {
@@ -13,22 +13,21 @@
         public Usuario()
         {
         }
-
-        public Usuario(string nomeUsuario, string emailUsuario, string senhaUsuario, DateTime dataCriacaoUsuario)
+        public Usuario(string userName, string userEmail, string userPassword, DateTime userCreationDate)
         {
-            NomeUsuario = nomeUsuario;
-            EmailUsuario = emailUsuario;
-            SenhaUsuario = senhaUsuario;
-            DataCriacaoUsuario = dataCriacaoUsuario;
+            NomeUsuario = userName;
+            EmailUsuario = userEmail;
+            SenhaUsuario = userPassword;
+            DataCriacaoUsuario = userCreationDate;
         }
 
-        public Usuario(string nomeUsuario, string emailUsuario, string senhaUsuario, DateTime dataCriacaoUsuario, ICollection<Equipe> equipes) 
+        public Usuario(string userName, string userEmail, string userPassword, DateTime userCreationDate, ICollection<Equipe> teams)
         {
-            NomeUsuario= nomeUsuario;
-            EmailUsuario = emailUsuario;    
-            SenhaUsuario = senhaUsuario;
-            DataCriacaoUsuario = dataCriacaoUsuario;
-            Equipes = equipes;
+            NomeUsuario = userName;
+            EmailUsuario = userEmail;
+            SenhaUsuario = userPassword;
+            DataCriacaoUsuario = userCreationDate;
+            Equipes = teams;
         }
     }
 }

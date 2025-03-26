@@ -1,4 +1,4 @@
 ﻿namespace TASKWAVE.API.Responses
 {
-    public record AcessoResponse(string NomeAcesso, string DescricaoAcesso, DateTime DataCriacaoAcesso);
+    public record AcessoResponse(string accessName, string accessDescription, DateTime accessCreationDate);
 }

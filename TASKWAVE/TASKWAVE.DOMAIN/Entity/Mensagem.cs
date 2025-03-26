@@ -1,4 +1,4 @@
-﻿namespace TASKWAVE.API.Infrastructure.Model
+﻿namespace TASKWAVE.DOMAIN.ENTITY
 {
     public class Mensagem
     {
@@ -11,11 +11,11 @@
         {
         }
 
-        public Mensagem(string conteudoMensagem, DateTime dataEnvioMensagem, int tarefaID)
+        public Mensagem(string messageContent, DateTime messageSentDate, int taskId)
         {
-            ConteudoMensagem = conteudoMensagem;
-            DataEnvioMensagem = dataEnvioMensagem;
-            TarefaID = tarefaID;
+            ConteudoMensagem = messageContent;
+            DataEnvioMensagem = messageSentDate;
+            TarefaID = taskId;
         }
     }
 }

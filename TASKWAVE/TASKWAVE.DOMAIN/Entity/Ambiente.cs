@@ -1,4 +1,4 @@
-﻿namespace TASKWAVE.API.Infrastructure.Model
+﻿namespace TASKWAVE.DOMAIN.ENTITY
 {
     public class Ambiente
     {
@@ -12,10 +12,10 @@
         {
         }
 
-        public Ambiente(string nomeAmbiente, string? descricaoAmbiente)
+        public Ambiente(string environmentName, string? environmentDescription)
         {
-            NomeAmbiente = nomeAmbiente;
-            DescricaoAmbiente = descricaoAmbiente;
+            NomeAmbiente = environmentName;
+            DescricaoAmbiente = environmentDescription;
         }
     }
 }

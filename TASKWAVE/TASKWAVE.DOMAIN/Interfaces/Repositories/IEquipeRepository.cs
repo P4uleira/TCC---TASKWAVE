@@ -1,10 +1,10 @@
-﻿using TASKWAVE.API.Infrastructure.Model;
+﻿using TASKWAVE.DOMAIN.ENTITY;
 
 namespace TASKWAVE.DOMAIN.Interfaces.Repositories
 {
     public interface IEquipeRepository : IBaseRepository<Equipe>
     {
-        public Task InsertProjectToEquip(int idProjeto, int idEquipe);
-        public Task InsertUserToEquip(int idUsuario, int idEquipe);
+        public Task InsertProjectToTeam(int projectId, int teamId);
+        public Task InsertUserToTeam(int userId, int teamId);
     }
 }

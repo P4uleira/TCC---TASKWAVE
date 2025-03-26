@@ -1,6 +1,6 @@
 ﻿using TASKWAVE.DOMAIN.Enums;
 
-namespace TASKWAVE.API.Infrastructure.Model
+namespace TASKWAVE.DOMAIN.ENTITY
 {
     public class HistoricoTarefa
     {
@@ -16,22 +16,22 @@ namespace TASKWAVE.API.Infrastructure.Model
         {
         }
 
-        public HistoricoTarefa(DateTime dataMudancaTarefa, SituacaoTarefaEnum situacaoAtualTarefa, SituacaoTarefaEnum? situacaoAnteriorTarefa, PrioridadeTarefaEnum prioridadeAtualTarefa, PrioridadeTarefaEnum? prioridadeAnteriorTarefa, int tarefaID)
+        public HistoricoTarefa(DateTime taskChangeDate, SituacaoTarefaEnum currentTaskStatus, SituacaoTarefaEnum? previousTaskStatus, PrioridadeTarefaEnum currentTaskPriority, PrioridadeTarefaEnum? previousTaskPriority, int taskId)
         {
-            DataMudancaTarefa = dataMudancaTarefa;
-            SituacaoAtualTarefa = situacaoAtualTarefa;
-            SituacaoAnteriorTarefa = situacaoAnteriorTarefa;
-            PrioridadeAtualTarefa = prioridadeAtualTarefa;
-            PrioridadeAnteriorTarefa = prioridadeAnteriorTarefa;
-            TarefaID = tarefaID;
+            DataMudancaTarefa = taskChangeDate;
+            SituacaoAtualTarefa = currentTaskStatus;
+            SituacaoAnteriorTarefa = previousTaskStatus;
+            PrioridadeAtualTarefa = currentTaskPriority;
+            PrioridadeAnteriorTarefa = previousTaskPriority;
+            TarefaID = taskId;
         }
 
-        public HistoricoTarefa(DateTime dataMudancaTarefa, SituacaoTarefaEnum situacaoAtualTarefa, PrioridadeTarefaEnum prioridadeAtualTarefa, int tarefaID)
+        public HistoricoTarefa(DateTime taskChangeDate, SituacaoTarefaEnum currentTaskStatus, PrioridadeTarefaEnum currentTaskPriority, int taskId)
         {
-            DataMudancaTarefa = dataMudancaTarefa;
-            SituacaoAtualTarefa = situacaoAtualTarefa;
-            PrioridadeAtualTarefa = prioridadeAtualTarefa;
-            TarefaID = tarefaID;
+            DataMudancaTarefa = taskChangeDate;
+            SituacaoAtualTarefa = currentTaskStatus;
+            PrioridadeAtualTarefa = currentTaskPriority;
+            TarefaID = taskId;
         }
     }
 }

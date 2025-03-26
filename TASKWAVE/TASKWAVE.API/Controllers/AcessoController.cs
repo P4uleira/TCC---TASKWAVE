@@ -1,8 +1,5 @@
-﻿using System.Linq;
-using Azure;
-using Azure.Core;
-using Microsoft.AspNetCore.Mvc;
-using TASKWAVE.API.Infrastructure.Model;
+﻿using Microsoft.AspNetCore.Mvc;
+using TASKWAVE.DOMAIN.ENTITY;
 using TASKWAVE.API.Requests;
 using TASKWAVE.API.Responses;
 using TASKWAVE.DOMAIN.Interfaces.Services;
@@ -29,10 +26,10 @@ namespace TASKWAVE.API.Controllers
             return Ok(accessResponse);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<AcessoResponse>> GetById(int id)
+        [HttpGet("{idAccess}")]
+        public async Task<ActionResult<AcessoResponse>> GetById(int idAccess)
         {
-            var access = await _accessService.GetAccessById(id);
+            var access = await _accessService.GetAccessById(idAccess);
             if (access == null)
                 return NotFound();
             return Ok(new AcessoResponse(access.NomeAcesso, access.DescricaoAcesso, access.DataCriacaoAcesso));
@@ -41,9 +38,9 @@ namespace TASKWAVE.API.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(AcessoRequest accessRequest)
         {
-            var access = new Acesso(accessRequest.NomeAcesso, accessRequest.DescricaoAcesso, accessRequest.DataCriacaoAcesso);
+            var access = new Acesso(accessRequest.accessName, accessRequest.accessDescription, accessRequest.accessCreationDate);
             await _accessService.CreateAccess(access);
-            return CreatedAtAction(nameof(GetById), new { id = access.IdAcesso }, null);
+            return CreatedAtAction(nameof(GetById), new { idAccess = access.IdAcesso }, null);
         }
 
         [HttpPost("AddAccessToUser/{idAccess}/{idUser}")]
@@ -52,27 +49,27 @@ namespace TASKWAVE.API.Controllers
             await _accessService.InsertAccessToUser(idAccess, idUser);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, AcessoRequest accessRequest)
+        [HttpPut("{idAccess}")]
+        public async Task<ActionResult> Update(int idAccess, AcessoRequest accessRequest)
         {
 
-            var accessExist = await _accessService.GetAccessById(id);
+            var accessExist = await _accessService.GetAccessById(idAccess);
             if (accessExist == null)
             {
                 return NotFound();
             }
 
-            accessExist.NomeAcesso = accessRequest.NomeAcesso;
-            accessExist.DescricaoAcesso = accessRequest.DescricaoAcesso;
+            accessExist.NomeAcesso = accessRequest.accessName;
+            accessExist.DescricaoAcesso = accessRequest.accessDescription;
 
             await _accessService.UpdateAccess(accessExist);
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        [HttpDelete("{idAccess}")]
+        public async Task<ActionResult> Delete(int idAccess)
         {
-            await _accessService.DeleteAccess(id);
+            await _accessService.DeleteAccess(idAccess);
             return NoContent();
         }
     }

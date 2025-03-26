@@ -1,9 +1,9 @@
-﻿using TASKWAVE.API.Infrastructure.Model;
+﻿using TASKWAVE.DOMAIN.ENTITY;
 
 namespace TASKWAVE.DOMAIN.Interfaces.Repositories
 {
     public interface IUsuarioRepository : IBaseRepository<Usuario>
     {
-        public Task CreateUserToEquip(Usuario usuario, int idEquipe);
+        public Task CreateUserToEquip(Usuario usuario, int teamId);
     }
 }

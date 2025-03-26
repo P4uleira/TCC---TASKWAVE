@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TASKWAVE.API.Infrastructure.Data;
-using TASKWAVE.API.Infrastructure.Model;
+using TASKWAVE.INFRA.Data;
+using TASKWAVE.DOMAIN.ENTITY;
 using TASKWAVE.DOMAIN.Interfaces.Repositories;
 
 
@@ -14,24 +14,24 @@ namespace TASKWAVE.INFRA.Repositories
         {
             _context = context;
         }
-        public async Task AddAsync(Ambiente entity)
+        public async Task AddAsync(Ambiente environment)
         {
-            await _context.Ambientes.AddAsync(entity);
+            await _context.Ambientes.AddAsync(environment);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(int idEnvironment)
         {
-            var ambiente = await _context.Ambientes.FindAsync(id);
-            if (ambiente != null)
+            var environment = await _context.Ambientes.FindAsync(idEnvironment);
+            if (environment != null)
             {
-                _context.Ambientes.Remove(ambiente);
+                _context.Ambientes.Remove(environment);
                 _context.SaveChanges();
             }
         }
-        public async Task UpdateAsync(Ambiente entity)
+        public async Task UpdateAsync(Ambiente environment)
         {
-            _context.Ambientes.Update(entity);
+            _context.Ambientes.Update(environment);
             await _context.SaveChangesAsync();
         }
 
@@ -40,9 +40,9 @@ namespace TASKWAVE.INFRA.Repositories
             return await _context.Ambientes.ToListAsync();
         }
 
-        public async Task<Ambiente> GetByIdAsync(int id)
+        public async Task<Ambiente> GetByIdAsync(int idEnvironment)
         {
-            return await _context.Ambientes.FindAsync(id);
+            return await _context.Ambientes.FindAsync(idEnvironment);
         }
 
     }

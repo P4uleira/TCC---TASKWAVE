@@ -1,4 +1,5 @@
 ﻿namespace TASKWAVE.API.Responses
 {  
-    public record AmbienteResponse(string nomeAmbiente, string descricaoAmbiente);
+    public record AmbienteResponse(string environmentName, string environmentDescription);
+
 }

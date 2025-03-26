@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace TASKWAVE.ENTITY.Migrations
+namespace TASKWAVE.INFRA.Data.Migrations
 {
     /// <inheritdoc />
     public partial class EntityAdjustments : Migration

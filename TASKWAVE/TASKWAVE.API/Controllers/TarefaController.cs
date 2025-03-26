@@ -1,8 +1,5 @@
-﻿using System.Threading.Tasks;
-using Azure;
-using Azure.Core;
-using Microsoft.AspNetCore.Mvc;
-using TASKWAVE.API.Infrastructure.Model;
+﻿using Microsoft.AspNetCore.Mvc;
+using TASKWAVE.DOMAIN.ENTITY;
 using TASKWAVE.API.Requests;
 using TASKWAVE.API.Responses;
 using TASKWAVE.DOMAIN.Interfaces.Services;
@@ -39,7 +36,7 @@ namespace TASKWAVE.API.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(TarefaRequest taskRequest)
         {
-            var task = new Tarefa(taskRequest.nomeTarefa, taskRequest.descricaoTarefa, taskRequest.situacaoTarefa, taskRequest.prioridadeTarefa, taskRequest.dataCriacaoTarefa, taskRequest.projetoId);
+            var task = new Tarefa(taskRequest.taskName, taskRequest.taskDescription, taskRequest.taskStatus, taskRequest.taskPriority, taskRequest.taskCreationDate, taskRequest.projectId);
             await _taskService.CreateTask(task);
             return CreatedAtAction(nameof(GetById), new { id = task.IdTarefa }, null);
         }
@@ -52,10 +49,10 @@ namespace TASKWAVE.API.Controllers
                 return NotFound();
             }
 
-            taskExist.NomeTarefa = taskRequest.nomeTarefa;
-            taskExist.DescricaoTarefa = taskRequest.descricaoTarefa;
-            taskExist.SituacaoTarefa = taskRequest.situacaoTarefa;
-            taskExist.PrioridadeTarefa = taskRequest.prioridadeTarefa;
+            taskExist.NomeTarefa = taskRequest.taskName;
+            taskExist.DescricaoTarefa = taskRequest.taskDescription;
+            taskExist.SituacaoTarefa = taskRequest.taskStatus;
+            taskExist.PrioridadeTarefa = taskRequest.taskPriority;
 
             await _taskService.UpdateTask(taskExist);
             return NoContent();

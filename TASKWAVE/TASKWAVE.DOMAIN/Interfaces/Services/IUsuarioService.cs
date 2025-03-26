@@ -1,4 +1,4 @@
-﻿using TASKWAVE.API.Infrastructure.Model;
+﻿using TASKWAVE.DOMAIN.ENTITY;
 
 namespace TASKWAVE.DOMAIN.Interfaces.Services
 {
@@ -9,6 +9,6 @@ namespace TASKWAVE.DOMAIN.Interfaces.Services
         Task DeleteUsuario(int id);
         Task<IEnumerable<Usuario>> GetAllUsuarios();
         Task<Usuario> GetUsuarioById(int id);
-        Task CreateUserToEquip(Usuario usuario, int idEquipe);
+        Task CreateUserToEquip(Usuario usuario, int teamId);
     }
 }

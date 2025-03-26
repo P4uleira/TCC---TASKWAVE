@@ -1,7 +1,5 @@
-﻿using Azure;
-using Azure.Core;
-using Microsoft.AspNetCore.Mvc;
-using TASKWAVE.API.Infrastructure.Model;
+﻿using Microsoft.AspNetCore.Mvc;
+using TASKWAVE.DOMAIN.ENTITY;
 using TASKWAVE.API.Requests;
 using TASKWAVE.API.Responses;
 using TASKWAVE.DOMAIN.Interfaces.Services;
@@ -12,66 +10,66 @@ namespace TASKWAVE.API.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private readonly IUsuarioService _usuarioService;
+        private readonly IUsuarioService _userService;
 
-        public UsuarioController(IUsuarioService usuarioService)
+        public UsuarioController(IUsuarioService userService)
         {
-            _usuarioService = usuarioService;
+            _userService = userService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UsuarioResponse>>> GetAll()
         {
-            var usuarios = await _usuarioService.GetAllUsuarios();
-            var response = usuarios.Select(usuario => new UsuarioResponse(usuario.NomeUsuario, usuario.EmailUsuario, usuario.SenhaUsuario, usuario.DataCriacaoUsuario));
+            var users = await _userService.GetAllUsuarios();
+            var response = users.Select(users => new UsuarioResponse(users.NomeUsuario, users.EmailUsuario, users.SenhaUsuario, users.DataCriacaoUsuario));
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UsuarioResponse>> GetById(int id)
+        [HttpGet("{idUser}")]
+        public async Task<ActionResult<UsuarioResponse>> GetById(int idUser)
         {
-            var usuario = await _usuarioService.GetUsuarioById(id);
-            if (usuario == null)
+            var users = await _userService.GetUsuarioById(idUser);
+            if (users == null)
                 return NotFound();
-            return Ok(new UsuarioResponse(usuario.NomeUsuario, usuario.EmailUsuario, usuario.SenhaUsuario, usuario.DataCriacaoUsuario));
+            return Ok(new UsuarioResponse(users.NomeUsuario, users.EmailUsuario, users.SenhaUsuario, users.DataCriacaoUsuario));
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(UsuarioRequest request)
+        public async Task<ActionResult> Create(UsuarioRequest projectRequest)
         {
-            var usuario = new Usuario(request.nomeUsuario, request.emailUsuario, request.senhaUsuario, request.dataCriacaoUsuario);
-            await _usuarioService.CreateUsuario(usuario);
-            return CreatedAtAction(nameof(GetById), new { id = usuario.IdUsuario }, null);
+            var users = new Usuario(projectRequest.userName, projectRequest.userEmail, projectRequest.userPassword, projectRequest.userCreationDate);
+            await _userService.CreateUsuario(users);
+            return CreatedAtAction(nameof(GetById), new { idUser = users.IdUsuario }, null);
         }
 
         [HttpPost("AddUserInEquip")]
-        public async Task CreateUserToEquip(UsuarioRequest usuario, int idEquipe)
+        public async Task CreateUserToEquip(UsuarioRequest users, int teamId)
         {
-            var newUsuario = new Usuario(usuario.nomeUsuario, usuario.emailUsuario, usuario.senhaUsuario, usuario.dataCriacaoUsuario);
-            await _usuarioService.CreateUserToEquip(newUsuario, idEquipe);
+            var newUsuario = new Usuario(users.userName, users.userEmail, users.userPassword, users.userCreationDate);
+            await _userService.CreateUserToEquip(newUsuario, teamId);
         }
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, UsuarioRequest request)
+        [HttpPut("{idUser}")]
+        public async Task<ActionResult> Update(int idUser, UsuarioRequest projectRequest)
         {
 
-            var usuarioExistente = await _usuarioService.GetUsuarioById(id);
-            if (usuarioExistente == null)
+            var existingUser = await _userService.GetUsuarioById(idUser);
+            if (existingUser == null)
             {
                 return NotFound();
             }
 
-            usuarioExistente.NomeUsuario = request.nomeUsuario;
-            usuarioExistente.EmailUsuario = request.emailUsuario;
-            usuarioExistente.SenhaUsuario = request.senhaUsuario;
+            existingUser.NomeUsuario = projectRequest.userName;
+            existingUser.EmailUsuario = projectRequest.userEmail;
+            existingUser.SenhaUsuario = projectRequest.userPassword;
 
-            await _usuarioService.UpdateUsuario(usuarioExistente);
+            await _userService.UpdateUsuario(existingUser);
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        [HttpDelete("{idUser}")]
+        public async Task<ActionResult> Delete(int idUser)
         {
-            await _usuarioService.DeleteUsuario(id);
+            await _userService.DeleteUsuario(idUser);
             return NoContent();
         }
     }

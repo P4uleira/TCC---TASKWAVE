@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TASKWAVE.API.Infrastructure.Data;
-using TASKWAVE.API.Infrastructure.Model;
+using TASKWAVE.INFRA.Data;
+using TASKWAVE.DOMAIN.ENTITY;
 using TASKWAVE.DOMAIN.Interfaces.Repositories;
 
 
@@ -20,20 +20,20 @@ namespace TASKWAVE.INFRA.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task CreateProjectToEquip(Projeto entity, int idEquipe)
+        public async Task CreateProjectToTeam(Projeto entity, int teamId)
         {
             await _context.Projetos.AddAsync(entity);
             await _context.SaveChangesAsync();
 
             var equipes = await _context.Equipes
             .Include(equipe => equipe.Projetos)
-            .FirstOrDefaultAsync(equipe => equipe.IdEquipe == idEquipe);
+            .FirstOrDefaultAsync(equipe => equipe.IdEquipe == teamId);
 
-            var projeto = await _context.Projetos.FindAsync(entity.IdProjeto);
+            var project = await _context.Projetos.FindAsync(entity.IdProjeto);
 
-            if (!equipes.Projetos.Contains(projeto))
+            if (!equipes.Projetos.Contains(project))
             {
-                equipes.Projetos.Add(projeto);
+                equipes.Projetos.Add(project);
             }
 
             await _context.SaveChangesAsync();
@@ -41,10 +41,10 @@ namespace TASKWAVE.INFRA.Repositories
 
         public async Task DeleteAsync(int id)
         {
-            var projeto = await _context.Projetos.FindAsync(id);
-            if (projeto != null)
+            var project = await _context.Projetos.FindAsync(id);
+            if (project != null)
             {
-                _context.Projetos.Remove(projeto);
+                _context.Projetos.Remove(project);
                 _context.SaveChanges();
             }
         }

@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TASKWAVE.API.Infrastructure.Model;
+using TASKWAVE.DOMAIN.ENTITY;
 using TASKWAVE.DOMAIN.Enums;
 
-namespace TASKWAVE.API.Infrastructure.Data.Mapping
+namespace TASKWAVE.INFRA.Data.Mapping
 {
     internal class TarefaTypeConfiguration : IEntityTypeConfiguration<Tarefa>
     {
