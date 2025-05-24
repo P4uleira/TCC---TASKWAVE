@@ -46,6 +46,19 @@ builder.Services.AddScoped<IHistoricoTarefaRepository, HistoricoTarefaRepository
 builder.Services.AddScoped<IHistoricoTarefaService, HistoricoTarefaService>();
 
 builder.Services.AddControllers();
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("https://localhost:7175") // URL do seu Blazor
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -58,6 +71,7 @@ var dbContext = scope.ServiceProvider.GetRequiredService<TaskWaveContext>();
 dbContext.Database.Migrate();
 
 app.UseSwagger();
+app.UseCors();
 app.UseSwaggerUI();
 app.MapControllers();
 app.UseHttpsRedirection();
