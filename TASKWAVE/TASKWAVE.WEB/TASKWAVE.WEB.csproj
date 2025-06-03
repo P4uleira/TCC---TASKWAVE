@@ -6,4 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Components\Pages\Component.razor" />
+    <Content Remove="wwwroot\bootstrap\site.css" />
+    <Content Remove="wwwroot\site.css" />
+  </ItemGroup>
+
 </Project>
