@@ -4,6 +4,11 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>97ecb38d-7ccf-4fbc-9148-5799f602efa1</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TASKWAVE.DOMAIN\TASKWAVE.DOMAIN.csproj" />
+  </ItemGroup>
 
 </Project>
