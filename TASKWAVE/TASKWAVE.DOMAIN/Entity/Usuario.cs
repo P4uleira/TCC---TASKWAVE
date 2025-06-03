@@ -1,11 +1,26 @@
-﻿namespace TASKWAVE.DOMAIN.ENTITY
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+
+namespace TASKWAVE.DOMAIN.ENTITY
 {
     public class Usuario
     {
         public int IdUsuario { get; set; }
+
+        [JsonPropertyName("userName")]
+        [Required(ErrorMessage = "O nome é obrigatório")]
         public string NomeUsuario { get; set; }
+
+        [Required(ErrorMessage = "O e-mail é obrigatório")]
+        [EmailAddress(ErrorMessage = "E-mail inválido")]
+        [JsonPropertyName("userEmail")]
         public string EmailUsuario { get; set; }
+
+        [Required(ErrorMessage = "A senha é obrigatória")]
+        [JsonPropertyName("userPassword")]
         public string SenhaUsuario { get; set; }
+
+        [JsonPropertyName("userCreationDate")]
         public DateTime DataCriacaoUsuario { get; set; }
         public ICollection<Equipe> Equipes { get; set; }
         public ICollection<Acesso> Acessos { get; set; }

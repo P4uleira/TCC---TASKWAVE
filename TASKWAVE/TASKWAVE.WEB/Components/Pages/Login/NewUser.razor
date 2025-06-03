@@ -1,0 +1,129 @@
+﻿@page "/Cadastro"
+@rendermode InteractiveServer
+@layout EmptyLayout
+@inject HttpClient Http
+
+<div class="login_header">
+	<h1 class="login_header_title">TaskWave</h1>
+</div>
+
+<div>
+	<div class="d-flex justify-content-center w-100">
+		<div class="row login_card">			
+			<div class="login_card_form">
+				<div>
+					<div class="mt-5 mb-4 mx-lg-5">
+						<h2 class="w-75 text-white">Criar uma conta TaskWave</h2>
+					</div>					
+				</div>
+				<div class="mx-lg-5">
+					<EditForm Model="@usuario" OnValidSubmit="HandleValidSubmit">
+						<DataAnnotationsValidator />
+
+						<div class="d-flex flex-column align-items-center gap-sm-3">
+
+							<div class="form-group w-100">
+								<label class="text-white fs-5" for="name">Nome</label>
+								<InputText id="name" class="text-white form-control shadow-none bg-transparent border-0 border-bottom rounded-0 valid" @bind-Value="usuario.NomeUsuario" />
+								<ValidationMessage For="@(() => usuario.NomeUsuario)" class="text-white" />
+							</div>
+							<div class="form-group w-100">
+								<label class="text-white fs-5" for="email">Email</label>
+								<InputText id="email" class="text-white form-control shadow-none bg-transparent border-0 border-bottom rounded-0 valid" @bind-Value="usuario.EmailUsuario" />
+								<ValidationMessage For="@(() => usuario.EmailUsuario)" class="text-white" />
+								<p style="font-family: sans-serif" class="text-white">@alredyExistEmailMessage</p>
+							</div>
+							<div class="form-group w-100">
+								<label class="text-white fs-5" for="senha">Senha</label>
+								<InputText id="senha" type="password" class="text-white form-control shadow-none bg-transparent border-0 border-bottom rounded-0 valid" @bind-Value="usuario.SenhaUsuario" />
+								<ValidationMessage For="@(() => usuario.SenhaUsuario)" class="text-white" />
+							</div>							
+						</div>						
+						<div class="d-flex align-items-center flex-column mt-xl-5">
+							<button type="submit" class="btn btn-primary rounded-3 w-50 rounded-pill fs-4">Criar Conta</button>
+							<a class="text-white mt-2" href="Login">Já possui conta? Acesse aqui</a>
+						</div>
+
+					</EditForm>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@code {
+	private bool alredyExistEmail = false;
+	public string alredyExistEmailMessage = string.Empty;
+	private Usuario usuario = new();
+
+	private async Task HandleValidSubmit()
+	{		
+		List<Usuario>? usuarios1;
+
+		usuarios1 = await Http.GetFromJsonAsync<List<Usuario>>("api/Usuario");
+
+		foreach (var u in usuarios1)
+		{
+			if (u.EmailUsuario == usuario.EmailUsuario)
+			{
+				alredyExistEmail = true;
+				alredyExistEmailMessage = "O e-mail informado já está cadastrado no sistema!";
+				break;
+			}
+		}
+
+		if (!alredyExistEmail)
+		{
+			usuario.NomeUsuario = usuario.NomeUsuario.Trim();
+			usuario.EmailUsuario = usuario.EmailUsuario.Trim();
+			HttpResponseMessage response = await Http.PostAsJsonAsync<Usuario>("api/Usuario", usuario);
+
+			if (response.IsSuccessStatusCode)
+			{
+				
+				Console.WriteLine("Usuário criado com sucesso!");
+			}
+			else
+			{
+				// Mostrar erro ao usuário, log, etc.
+				Console.WriteLine("Erro ao criar usuário.");
+			}
+		}	
+	}
+}
+
+<style>
+
+	body {
+		background-color: #333339;
+		font-family: Verdana;
+	}
+
+	.login_header {
+		height: 200px;
+		background-color: #F0EBD8;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.login_header_title {
+		font-size: 128px;
+		font-family: Verdana;
+		color: #1D2D44;
+	}
+
+	.login_card {
+		width: 75%;
+		margin-top: 55px;
+		background-color: #748CAB;
+		border-radius: 20px;
+		min-height: 65vh;
+		max-width: 650px;
+	}
+
+	.login_card_form {
+		background-color: #3E5C76;
+		border-radius: 20px;
+	}
+</style>
