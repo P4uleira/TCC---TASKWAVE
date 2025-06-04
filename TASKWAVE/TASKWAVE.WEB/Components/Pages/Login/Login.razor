@@ -1,0 +1,111 @@
+﻿@page "/Login"
+@rendermode InteractiveServer
+@layout EmptyLayout
+@inject HttpClient Http
+
+<div class="login_header">
+	<h1 class="login_header_title">TaskWave</h1>
+</div>
+
+<div>
+	<div class="d-flex justify-content-center w-100">
+		<div class="row login_card">
+			<div style="max-width: 500px" class="col-md-4">
+				<div class="mt-5 mb-5 d-flex justify-content-center">
+					<img class="w-75" src="images/TaskWave_Logo.png" alt="Logo TaskWave" />
+				</div>
+				<div class="text-center">
+					<p class="fs-3 text-white">Bem vindo ao TaskWave</p>
+					<p class="text-white">
+						Planejamento inteligente,
+						resultados incríveis.
+					</p>
+				</div>
+			</div>
+			<div style="max-width: 650px" class="col-md-8 login_card_form">
+				<div>
+					<div class="mt-5 mb-5 text-center">
+						<h1 class="text-white">Login</h1>
+					</div>
+					<div>
+						<EditForm Model="@usuario" OnValidSubmit="HandleValidSubmit">
+							<DataAnnotationsValidator />
+							<ValidationSummary class="validation-summary" />
+
+							<div class="d-flex align-items-center flex-column gap-5 mb-3 mt-3">
+
+								<div class="form-group w-75">
+									<label class="text-white fs-5" for="email">Email</label>
+									<InputText id="email" class="text-white form-control shadow-none bg-transparent border-0 border-bottom rounded-0 valid" @bind-Value="usuario.EmailUsuario" />
+									
+								</div>
+								<div class="form-group w-75">
+									<label class="text-white fs-5" for="senha">Senha</label>
+									<InputText id="senha" type="password" class="text-white form-control shadow-none bg-transparent border-0 border-bottom rounded-0 valid" @bind-Value="usuario.SenhaUsuario" />
+									
+								</div>
+							</div>
+							<div class="d-flex justify-content-center mb-5">
+								<div class="w-75 d-flex justify-content-end">
+									<a class="text-white mb-2" href="ForgotPassword">Esqueci minha senha</a>
+								</div>
+							</div>
+
+							<div class="d-flex align-items-center flex-column">
+								<button type="submit" class="btn btn-primary rounded-3 w-50 rounded-pill fs-4">Login</button>
+								<a class="text-white mt-2" href="Cadastro">Nova Conta? Cadastre-se</a>
+							</div>
+						</EditForm>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@code {
+
+	private Usuario usuario = new();
+
+	private async Task HandleValidSubmit()
+	{
+	
+	}
+
+}
+
+<style>
+
+	body {
+		background-color: #333339;
+		font-family: Verdana;
+	}
+
+	.login_header {
+		height: 200px;
+		background-color: #F0EBD8;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.login_header_title {
+		font-size: 128px;
+		font-family: Verdana;
+		color: #1D2D44;
+	}
+
+	.login_card {
+		width: 75%;
+		margin-top: 55px;
+		background-color: #748CAB;
+		border-radius: 20px;
+		min-height: 65vh;
+		max-width: 900px;
+	}
+
+	.login_card_form {
+		background-color: #3E5C76;
+		border-radius: 20px;
+	}
+</style>
