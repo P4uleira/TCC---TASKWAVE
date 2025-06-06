@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TASKWAVE.DOMAIN.ENTITY;
-using TASKWAVE.API.Requests;
-using TASKWAVE.API.Responses;
+using TASKWAVE.DTO.Requests;
 using TASKWAVE.DOMAIN.Interfaces.Services;
-using TASKWAVE.DOMAIN.Services;
+using TASKWAVE.DTO.Responses;
 
-namespace TASKWAVE.API.Controllers
+namespace TASKWAVE.DTO.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
