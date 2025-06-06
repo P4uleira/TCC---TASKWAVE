@@ -4,6 +4,7 @@ using TASKWAVE.API.Requests;
 using TASKWAVE.API.Responses;
 using TASKWAVE.DOMAIN.Interfaces.Services;
 using System;
+using System.Linq;
 
 namespace TASKWAVE.API.Controllers
 {
@@ -22,7 +23,7 @@ namespace TASKWAVE.API.Controllers
         public async Task<ActionResult<IEnumerable<AmbienteResponse>>> GetAll()
         {
             var environments = await _environmentService.GetAllEnvironments();
-            var response = environments.Select(environment => new AmbienteResponse(environment.NomeAmbiente, environment.DescricaoAmbiente));
+            var response = environments.Select(environment => new AmbienteResponse(environment.IdAmbiente, environment.NomeAmbiente, environment.DescricaoAmbiente));
             return Ok(response);
         }
 
@@ -32,7 +33,7 @@ namespace TASKWAVE.API.Controllers
             var environment = await _environmentService.GetEnvironmentById(idEnvironment);
             if (environment == null)
                 return NotFound();
-            return Ok(new AmbienteResponse(environment.NomeAmbiente, environment.DescricaoAmbiente));
+            return Ok(new AmbienteResponse(environment.IdAmbiente, environment.NomeAmbiente, environment.DescricaoAmbiente));
         }
 
         [HttpPost]
