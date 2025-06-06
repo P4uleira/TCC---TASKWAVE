@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TASKWAVE.API\TASKWAVE.API.csproj" />
     <ProjectReference Include="..\TASKWAVE.DOMAIN\TASKWAVE.DOMAIN.csproj" />
   </ItemGroup>
 
