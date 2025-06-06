@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TASKWAVE.DOMAIN.ENTITY;
-using TASKWAVE.API.Requests;
-using TASKWAVE.API.Responses;
 using TASKWAVE.DOMAIN.Interfaces.Services;
+using TASKWAVE.DTO.Requests;
+using TASKWAVE.DTO.Responses;
 
 namespace TASKWAVE.API.Controllers
 {
