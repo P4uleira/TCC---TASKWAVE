@@ -1,7 +1,7 @@
 ﻿@page "/Cadastro"
 @rendermode InteractiveServer
-@layout EmptyLayout
 @inject HttpClient Http
+@layout EmptyLayout
 
 <div>
 	<div class="d-flex justify-content-center w-100">
@@ -33,8 +33,8 @@
 								<label class="text-white fs-5" for="senha">Senha</label>
 								<InputText id="senha" type="password" class="text-white form-control shadow-none bg-transparent border-0 border-bottom rounded-0 valid" @bind-Value="usuario.SenhaUsuario" />
 								<ValidationMessage For="@(() => usuario.SenhaUsuario)" class="text-white" />
-							</div>							
-						</div>						
+							</div>
+						</div>
 						<div class="d-flex align-items-center flex-column mt-xl-5">
 							<button type="submit" class="btn btn-primary rounded-3 w-50 rounded-pill fs-4">Criar Conta</button>
 							<a class="text-white mt-2" href="Login">Já possui conta? Acesse aqui</a>
