@@ -4,6 +4,8 @@ namespace TASKWAVE.DTO.Requests
 {
     public class SetorRequest
     {
+        public int sectorId { get; set; }
+
         [Required(ErrorMessage = "O nome do setor é obrigatório.")]
         public string sectorName { get; set; }
 

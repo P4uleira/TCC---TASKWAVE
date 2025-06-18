@@ -1,5 +1,5 @@
 ﻿namespace TASKWAVE.DTO.Responses
 {
-    public record SetorResponse(string sectorName, string sectorDescription, int environmentId);
+    public record SetorResponse(int sectorId, string sectorName, string sectorDescription, int environmentId);
 
 }

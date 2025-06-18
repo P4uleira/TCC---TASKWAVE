@@ -1,0 +1,166 @@
+﻿@page "/Setor"
+@rendermode InteractiveServer
+@layout EmptyLayout
+@inject HttpClient Http
+
+<h3>Setor</h3>
+
+@foreach (var sector in sectorList)
+{
+	var ambienteNome = environmentListInUse.FirstOrDefault(a => a.environmentID == sector.environmentId)?.environmentName ?? "Ambiente não encontrado";
+	<div class="mb-3">
+		<label>@sector.sectorName</label>
+		<label>@sector.sectorDescription</label>
+		<label>@ambienteNome</label>
+		<button class="btn btn-sm btn-primary" @onclick="() => OpenEditModal(sector)">Editar</button>
+	</div>
+}
+
+
+@if (selectedSector != null)
+{
+	<div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+		<div class="modal-dialog">
+			<div class="modal-content text-black">
+				<div class="modal-header">
+					<h5 class="modal-title">Editar Setor</h5>
+					<button type="button" class="btn-close" @onclick="CloseModal"></button>
+				</div>
+				<div class="modal-body">
+					<EditForm Model="@selectedSector" OnValidSubmit="UpdateSector">
+						<DataAnnotationsValidator />
+						<ValidationSummary />
+
+						<div class="mb-3">
+							<label>Nome</label>
+							<InputText class="form-control" @bind-Value="selectedSector.sectorName" />
+						</div>
+
+						<div class="mb-3">
+							<label>Descrição</label>
+							<InputText class="form-control" @bind-Value="selectedSector.sectorDescription" />
+						</div>
+
+						<div class="mb-3">
+							<label>Ambiente</label>
+							<InputSelect class="form-select" @bind-Value="selectedSector.environmentId">
+								@foreach (var ambiente in environmentListInUse)
+								{
+									<option value="@ambiente.environmentID">@ambiente.environmentName</option>
+								}
+							</InputSelect>
+						</div>
+
+						<button type="button" class="btn btn-success" @onclick="() => DeleteSector(selectedSector.sectorId)">Excluir Setor</button>
+						<button type="submit" class="btn btn-success">Salvar</button>
+						<button type="button" class="btn btn-secondary ms-2" @onclick="CloseModal">Cancelar</button>
+					</EditForm>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@code {
+
+	private List<AmbienteResponse> environmentListInUse = new();
+	private List<SetorResponse> sectorList = new();
+	private string mensageResponse;
+	private SetorRequest selectedSector;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await GetAllEnvironment();
+		await GetAllSectors();
+	}
+
+
+	#region CRUD
+	private async Task GetAllEnvironment()
+	{
+		try
+		{
+			environmentListInUse = await Http.GetFromJsonAsync<List<AmbienteResponse>>("api/Ambiente");
+		}
+		catch (Exception ex)
+		{
+			mensageResponse = $"Erro ao carregar ambientes: {ex.Message}";
+		}
+	}
+
+	private async Task GetAllSectors()
+	{
+		try
+		{
+			sectorList = await Http.GetFromJsonAsync<List<SetorResponse>>("api/Setor");
+		}
+		catch (Exception ex)
+		{
+			mensageResponse = $"Erro ao carregar ambientes: {ex.Message}";
+		}
+	}
+
+	
+	private async Task DeleteSector(int sectorId)
+	{
+		try
+		{
+			var response = await Http.DeleteAsync($"api/Setor/{sectorId}");
+
+			if (response.IsSuccessStatusCode)
+			{
+				await GetAllSectors();
+				CloseModal();
+			}
+			else
+			{
+				mensageResponse = "Erro ao excluir setor.";
+			}
+		}
+		catch (Exception ex)
+		{
+			mensageResponse = $"Erro: {ex.Message}";
+		}
+	}
+	
+	private async Task UpdateSector()
+	{
+		try
+		{
+			var response = await Http.PutAsJsonAsync($"api/Setor/{selectedSector.sectorId}", selectedSector);
+			if (response.IsSuccessStatusCode)
+			{
+				await GetAllSectors();
+				CloseModal();
+			}
+			else
+			{
+				mensageResponse = "Erro ao atualizar setor.";
+			}
+		}
+		catch (Exception ex)
+		{
+			mensageResponse = $"Erro: {ex.Message}";
+		}
+	}
+	#endregion
+
+
+	#region Modal
+	private void OpenEditModal(SetorResponse sector)
+	{
+		selectedSector = new SetorRequest
+		{
+			sectorId = sector.sectorId,
+			sectorName = sector.sectorName,
+			sectorDescription = sector.sectorDescription,
+			environmentId = sector.environmentId
+		};
+	}
+
+	private void CloseModal()
+	{
+		selectedSector = null;
+	}
+	#endregion
+}
