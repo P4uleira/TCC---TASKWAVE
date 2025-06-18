@@ -10,14 +10,23 @@ namespace TASKWAVE.DOMAIN.Helpers
 {
     public static class CryptoHelper
     {
-        private static readonly string Key = "v8c3#40"; // 32 bytes para AES-256
-        private static readonly string IV = "IVv8c3#40"; // 16 bytes para AES
+        private static readonly byte[] KeyBytes = HexStringToByteArray("0793cae1d88c581b193ba8561f8f4c45");
+        private static readonly byte[] IVBytes = HexStringToByteArray("ca93b33c57308ce05efa9d68a09c1884");
+
+        private static byte[] HexStringToByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length / 2)
+                .Select(i => Convert.ToByte(hex.Substring(i * 2, 2), 16))
+                .ToArray();
+        }
+
 
         public static string EncryptToUrlSafe(string plainText)
         {
             using var aes = Aes.Create();
-            aes.Key = Encoding.UTF8.GetBytes(Key);
-            aes.IV = Encoding.UTF8.GetBytes(IV);
+            aes.Key = KeyBytes;
+            aes.IV = IVBytes;
+
 
             using var encryptor = aes.CreateEncryptor();
             using var ms = new MemoryStream();
@@ -38,8 +47,9 @@ namespace TASKWAVE.DOMAIN.Helpers
             var encryptedBytes = Convert.FromBase64String(base64);
 
             using var aes = Aes.Create();
-            aes.Key = Encoding.UTF8.GetBytes(Key);
-            aes.IV = Encoding.UTF8.GetBytes(IV);
+            aes.Key = KeyBytes;
+            aes.IV = IVBytes;
+
 
             using var decryptor = aes.CreateDecryptor();
             using var ms = new MemoryStream(encryptedBytes);
