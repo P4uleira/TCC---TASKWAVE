@@ -21,7 +21,7 @@ namespace TASKWAVE.API.Controllers
         public async Task<ActionResult<IEnumerable<SetorResponse>>> GetAll()
         {
             var sectors = await _sectorService.GetAllSectors();
-            var response = sectors.Select(sector => new SetorResponse(sector.NomeSetor, sector.DescricaoSetor, sector.AmbienteId));
+            var response = sectors.Select(sector => new SetorResponse(sector.IdSetor,sector.NomeSetor, sector.DescricaoSetor, sector.AmbienteId));
             return Ok(response);
         }
 
@@ -31,7 +31,8 @@ namespace TASKWAVE.API.Controllers
             var sector = await _sectorService.GetSectorById(idSector);
             if (sector == null)
                 return NotFound();
-            return Ok(new SetorResponse(sector.NomeSetor, sector.DescricaoSetor, sector.AmbienteId));
+
+            return Ok();
         }
 
         [HttpPost]
