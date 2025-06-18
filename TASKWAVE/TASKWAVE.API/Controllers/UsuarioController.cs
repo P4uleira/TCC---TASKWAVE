@@ -21,7 +21,7 @@ namespace TASKWAVE.API.Controllers
         public async Task<ActionResult<IEnumerable<UsuarioResponse>>> GetAll()
         {
             var users = await _userService.GetAllUsuarios();
-            var response = users.Select(users => new UsuarioResponse(users.NomeUsuario, users.EmailUsuario, users.SenhaUsuario, users.DataCriacaoUsuario));
+            var response = users.Select(users => new UsuarioResponse(users.IdUsuario, users.NomeUsuario, users.EmailUsuario, users.SenhaUsuario, users.DataCriacaoUsuario));
             return Ok(response);
         }
 
@@ -31,7 +31,7 @@ namespace TASKWAVE.API.Controllers
             var users = await _userService.GetUsuarioById(idUser);
             if (users == null)
                 return NotFound();
-            return Ok(new UsuarioResponse(users.NomeUsuario, users.EmailUsuario, users.SenhaUsuario, users.DataCriacaoUsuario));
+            return Ok(new UsuarioResponse(users.IdUsuario, users.NomeUsuario, users.EmailUsuario, users.SenhaUsuario, users.DataCriacaoUsuario));
         }
 
         [HttpPost]
