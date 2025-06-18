@@ -17,12 +17,12 @@ namespace TASKWAVE.INFRA.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.2")
+                .HasAnnotation("ProductVersion", "9.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Acesso", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Acesso", b =>
                 {
                     b.Property<int>("IdAcesso")
                         .ValueGeneratedOnAdd()
@@ -49,7 +49,7 @@ namespace TASKWAVE.INFRA.Data.Migrations
                     b.ToTable("TB_ACESSO", (string)null);
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Ambiente", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Ambiente", b =>
                 {
                     b.Property<int>("IdAmbiente")
                         .ValueGeneratedOnAdd()
@@ -72,7 +72,7 @@ namespace TASKWAVE.INFRA.Data.Migrations
                     b.ToTable("TB_AMBIENTE", (string)null);
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Equipe", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Equipe", b =>
                 {
                     b.Property<int>("IdEquipe")
                         .ValueGeneratedOnAdd()
@@ -100,7 +100,7 @@ namespace TASKWAVE.INFRA.Data.Migrations
                     b.ToTable("TB_EQUIPE", (string)null);
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.HistoricoTarefa", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.HistoricoTarefa", b =>
                 {
                     b.Property<int>("IdHistoricoTarefa")
                         .ValueGeneratedOnAdd()
@@ -141,7 +141,7 @@ namespace TASKWAVE.INFRA.Data.Migrations
                     b.ToTable("TB_HISTORICO_TAREFA", (string)null);
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Mensagem", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Mensagem", b =>
                 {
                     b.Property<int>("IdMensagem")
                         .ValueGeneratedOnAdd()
@@ -169,7 +169,7 @@ namespace TASKWAVE.INFRA.Data.Migrations
                     b.ToTable("TB_MENSAGEM", (string)null);
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Projeto", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Projeto", b =>
                 {
                     b.Property<int>("IdProjeto")
                         .ValueGeneratedOnAdd()
@@ -196,7 +196,7 @@ namespace TASKWAVE.INFRA.Data.Migrations
                     b.ToTable("TB_PROJETO", (string)null);
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Setor", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Setor", b =>
                 {
                     b.Property<int>("IdSetor")
                         .ValueGeneratedOnAdd()
@@ -224,7 +224,7 @@ namespace TASKWAVE.INFRA.Data.Migrations
                     b.ToTable("TB_SETOR", (string)null);
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Tarefa", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Tarefa", b =>
                 {
                     b.Property<int>("IdTarefa")
                         .ValueGeneratedOnAdd()
@@ -274,33 +274,45 @@ namespace TASKWAVE.INFRA.Data.Migrations
                     b.ToTable("TB_TAREFA", (string)null);
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Usuario", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Usuario", b =>
                 {
                     b.Property<int>("IdUsuario")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("ID_USUARIO");
+                        .HasColumnName("ID_USUARIO")
+                        .HasAnnotation("Relational:JsonPropertyName", "userID");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUsuario"));
 
                     b.Property<DateTime>("DataCriacaoUsuario")
                         .HasColumnType("datetime2")
-                        .HasColumnName("DATA_CRIACAO_USUARIO");
+                        .HasColumnName("DATA_CRIACAO_USUARIO")
+                        .HasAnnotation("Relational:JsonPropertyName", "userCreationDate");
+
+                    b.Property<DateTime?>("DataExpiracaoToken")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("EmailUsuario")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("EMAIL_USUARIO");
+                        .HasColumnName("EMAIL_USUARIO")
+                        .HasAnnotation("Relational:JsonPropertyName", "userEmail");
 
                     b.Property<string>("NomeUsuario")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("NOME_USUARIO");
+                        .HasColumnName("NOME_USUARIO")
+                        .HasAnnotation("Relational:JsonPropertyName", "userName");
 
                     b.Property<string>("SenhaUsuario")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("SENHA_USUARIO");
+                        .HasColumnName("SENHA_USUARIO")
+                        .HasAnnotation("Relational:JsonPropertyName", "userPassword");
+
+                    b.Property<string>("TokenRedefinicaoSenha")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdUsuario");
 
@@ -352,9 +364,9 @@ namespace TASKWAVE.INFRA.Data.Migrations
                     b.ToTable("TB_EQUIPE_USUARIO", (string)null);
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Equipe", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Equipe", b =>
                 {
-                    b.HasOne("TASKWAVE.API.Infrastructure.Model.Setor", "Setor")
+                    b.HasOne("TASKWAVE.DOMAIN.ENTITY.Setor", "Setor")
                         .WithMany("Equipes")
                         .HasForeignKey("SetorId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -363,9 +375,9 @@ namespace TASKWAVE.INFRA.Data.Migrations
                     b.Navigation("Setor");
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.HistoricoTarefa", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.HistoricoTarefa", b =>
                 {
-                    b.HasOne("TASKWAVE.API.Infrastructure.Model.Tarefa", "Tarefa")
+                    b.HasOne("TASKWAVE.DOMAIN.ENTITY.Tarefa", "Tarefa")
                         .WithMany("HistoricoTarefas")
                         .HasForeignKey("TarefaID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -374,9 +386,9 @@ namespace TASKWAVE.INFRA.Data.Migrations
                     b.Navigation("Tarefa");
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Mensagem", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Mensagem", b =>
                 {
-                    b.HasOne("TASKWAVE.API.Infrastructure.Model.Tarefa", "Tarefa")
+                    b.HasOne("TASKWAVE.DOMAIN.ENTITY.Tarefa", "Tarefa")
                         .WithMany("Mensagems")
                         .HasForeignKey("TarefaID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -385,9 +397,9 @@ namespace TASKWAVE.INFRA.Data.Migrations
                     b.Navigation("Tarefa");
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Setor", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Setor", b =>
                 {
-                    b.HasOne("TASKWAVE.API.Infrastructure.Model.Ambiente", "Ambiente")
+                    b.HasOne("TASKWAVE.DOMAIN.ENTITY.Ambiente", "Ambiente")
                         .WithMany("Setores")
                         .HasForeignKey("AmbienteId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -396,9 +408,9 @@ namespace TASKWAVE.INFRA.Data.Migrations
                     b.Navigation("Ambiente");
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Tarefa", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Tarefa", b =>
                 {
-                    b.HasOne("TASKWAVE.API.Infrastructure.Model.Projeto", "Projeto")
+                    b.HasOne("TASKWAVE.DOMAIN.ENTITY.Projeto", "Projeto")
                         .WithMany("Tarefas")
                         .HasForeignKey("ProjetoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -409,14 +421,14 @@ namespace TASKWAVE.INFRA.Data.Migrations
 
             modelBuilder.Entity("TB_ACESSO_USUARIO", b =>
                 {
-                    b.HasOne("TASKWAVE.API.Infrastructure.Model.Acesso", null)
+                    b.HasOne("TASKWAVE.DOMAIN.ENTITY.Acesso", null)
                         .WithMany()
                         .HasForeignKey("ACESSO_ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_ACESSO_ID");
 
-                    b.HasOne("TASKWAVE.API.Infrastructure.Model.Usuario", null)
+                    b.HasOne("TASKWAVE.DOMAIN.ENTITY.Usuario", null)
                         .WithMany()
                         .HasForeignKey("USUARIO_ID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -426,14 +438,14 @@ namespace TASKWAVE.INFRA.Data.Migrations
 
             modelBuilder.Entity("TB_EQUIPE_PROJETO", b =>
                 {
-                    b.HasOne("TASKWAVE.API.Infrastructure.Model.Equipe", null)
+                    b.HasOne("TASKWAVE.DOMAIN.ENTITY.Equipe", null)
                         .WithMany()
                         .HasForeignKey("EQUIPE_ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_EQUIPE_ID");
 
-                    b.HasOne("TASKWAVE.API.Infrastructure.Model.Projeto", null)
+                    b.HasOne("TASKWAVE.DOMAIN.ENTITY.Projeto", null)
                         .WithMany()
                         .HasForeignKey("PROJETO_ID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -443,14 +455,14 @@ namespace TASKWAVE.INFRA.Data.Migrations
 
             modelBuilder.Entity("TB_EQUIPE_USUARIO", b =>
                 {
-                    b.HasOne("TASKWAVE.API.Infrastructure.Model.Equipe", null)
+                    b.HasOne("TASKWAVE.DOMAIN.ENTITY.Equipe", null)
                         .WithMany()
                         .HasForeignKey("EQUIPE_ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_EQUIPE_ID");
 
-                    b.HasOne("TASKWAVE.API.Infrastructure.Model.Usuario", null)
+                    b.HasOne("TASKWAVE.DOMAIN.ENTITY.Usuario", null)
                         .WithMany()
                         .HasForeignKey("USUARIO_ID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -458,22 +470,22 @@ namespace TASKWAVE.INFRA.Data.Migrations
                         .HasConstraintName("FK_USUARIO_ID");
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Ambiente", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Ambiente", b =>
                 {
                     b.Navigation("Setores");
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Projeto", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Projeto", b =>
                 {
                     b.Navigation("Tarefas");
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Setor", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Setor", b =>
                 {
                     b.Navigation("Equipes");
                 });
 
-            modelBuilder.Entity("TASKWAVE.API.Infrastructure.Model.Tarefa", b =>
+            modelBuilder.Entity("TASKWAVE.DOMAIN.ENTITY.Tarefa", b =>
                 {
                     b.Navigation("HistoricoTarefas");
 
