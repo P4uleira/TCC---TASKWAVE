@@ -8,20 +8,20 @@ body {
 
 
 .header {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     background-color: #1c1f26;
     padding: 10px 20px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
-    .header a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        text-align: center;
-    }
+.header a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+}
 
 .search-bar input {
     width: 90%;
@@ -45,10 +45,10 @@ body {
     
 }
 
-    .sidebar p {
-        margin: 15px 0;
-        cursor: pointer;
-    }
+.sidebar p {
+    margin: 15px 0;
+    cursor: pointer;
+}
 
 .content {
    
