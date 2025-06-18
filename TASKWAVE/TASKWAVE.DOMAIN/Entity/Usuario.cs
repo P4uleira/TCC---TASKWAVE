@@ -5,6 +5,7 @@ namespace TASKWAVE.DOMAIN.ENTITY
 {
     public class Usuario
     {
+        [JsonPropertyName("userID")]
         public int IdUsuario { get; set; }
 
         [JsonPropertyName("userName")]
@@ -24,12 +25,22 @@ namespace TASKWAVE.DOMAIN.ENTITY
         public DateTime DataCriacaoUsuario { get; set; }
         public ICollection<Equipe> Equipes { get; set; }
         public ICollection<Acesso> Acessos { get; set; }
+        public string TokenRedefinicaoSenha { get; set; }
+        public DateTime? DataExpiracaoToken { get; set; }
 
         public Usuario()
         {
         }
-        public Usuario(string userName, string userEmail, string userPassword, DateTime userCreationDate)
+        public Usuario( string userName, string userEmail, string userPassword, DateTime userCreationDate)
         {
+            NomeUsuario = userName;
+            EmailUsuario = userEmail;
+            SenhaUsuario = userPassword;
+            DataCriacaoUsuario = userCreationDate;
+        }
+        public Usuario(int userID, string userName, string userEmail, string userPassword, DateTime userCreationDate)
+        {
+            IdUsuario = userID;
             NomeUsuario = userName;
             EmailUsuario = userEmail;
             SenhaUsuario = userPassword;
@@ -44,5 +55,5 @@ namespace TASKWAVE.DOMAIN.ENTITY
             DataCriacaoUsuario = userCreationDate;
             Equipes = teams;
         }
-    }
+    }    
 }
