@@ -12,4 +12,5 @@ namespace TASKWAVE.DOMAIN.ENTITY
         public string Assunto { get; set; }
         public string Corpo { get; set; }
     }
+    
 }

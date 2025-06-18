@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TASKWAVE.API.Responses;
+using TASKWAVE.DOMAIN.Interfaces.Services;
 using TASKWAVE.DOMAIN.Services;
 
 namespace TASKWAVE.API.Controllers
@@ -8,17 +9,17 @@ namespace TASKWAVE.API.Controllers
     [Route("api/[controller]")]
     public class EmailController : ControllerBase
     {
-        private readonly EmailService _emailService;
+        private readonly IEmailService _emailService;
 
-        public EmailController()
+        public EmailController(IEmailService emailService)
         {
-            _emailService = new EmailService(); // Para TCC, não precisa injeção de dependência
+            _emailService = emailService;
         }
 
         [HttpPost("enviar")]
         public async Task<IActionResult> Enviar([FromBody] EmailResponse dto)
         {
-            await _emailService.EnviarEmailAsync(dto.mailTO, dto.mailSubject, dto.mailBody);
+            await _emailService.EnviarAsync(dto.mailTO, dto.mailSubject, dto.mailBody);
             return Ok("Email enviado com sucesso!");
         }
     }

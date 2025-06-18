@@ -45,6 +45,8 @@ builder.Services.AddScoped<ITarefaService, TarefaService>();
 builder.Services.AddScoped<IHistoricoTarefaRepository, HistoricoTarefaRepository>();
 builder.Services.AddScoped<IHistoricoTarefaService, HistoricoTarefaService>();
 
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>

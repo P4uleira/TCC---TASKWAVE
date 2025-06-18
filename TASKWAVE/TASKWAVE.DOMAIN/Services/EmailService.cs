@@ -1,35 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using TASKWAVE.DOMAIN.ENTITY;
+using TASKWAVE.DOMAIN.Interfaces.Repositories;
+using TASKWAVE.DOMAIN.Interfaces.Services;
 using System.Net.Mail;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace TASKWAVE.DOMAIN.Services
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
-        public async Task EnviarEmailAsync(string para, string assunto, string corpo)
+        private readonly IConfiguration _config;
+
+        public EmailService(IConfiguration config)
         {
-            var smtpClient = new SmtpClient("smtp.gmail.com")
+            _config = config ?? throw new ArgumentNullException(nameof(config));
+        }
+
+        public async Task EnviarAsync(string para, string assunto, string corpo)
+        {
+            var smtpHost = _config["Smtp:Host"];
+            var smtpPort = _config["Smtp:Port"];
+            var smtpUser = _config["Smtp:User"];
+            var smtpPass = _config["Smtp:Pass"];
+
+            if (string.IsNullOrEmpty(smtpHost) || string.IsNullOrEmpty(smtpPort) || string.IsNullOrEmpty(smtpUser) || string.IsNullOrEmpty(smtpPass))
             {
-                Port = 587,
-                Credentials = new NetworkCredential("leonardomiguelvs84@gmail.com", "whbx jkor rhlh evqr"),
+                throw new InvalidOperationException("Configurações de SMTP estão incompletas.");
+            }
+
+            using var smtpClient = new SmtpClient
+            {
+                Host = smtpHost,
+                Port = int.Parse(smtpPort),
                 EnableSsl = true,
+                Credentials = new NetworkCredential(smtpUser, smtpPass)
             };
 
-            var mensagem = new MailMessage
+            var mail = new MailMessage
             {
-                From = new MailAddress("leonardomiguelvs84@gmail.com"),
+                From = new MailAddress(smtpUser),
                 Subject = assunto,
                 Body = corpo,
-                IsBodyHtml = false,
+                IsBodyHtml = true
             };
+            mail.To.Add(para);
 
-            mensagem.To.Add(para);
-
-            await smtpClient.SendMailAsync(mensagem);
+            await smtpClient.SendMailAsync(mail);
         }
     }
 }
