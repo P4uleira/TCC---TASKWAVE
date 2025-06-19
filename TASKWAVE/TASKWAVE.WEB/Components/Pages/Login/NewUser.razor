@@ -58,20 +58,23 @@
 
 		usuarios1 = await Http.GetFromJsonAsync<List<Usuario>>("api/Usuario");
 
-		foreach (var u in usuarios1)
+		if (usuarios1 != null)
 		{
-			if (u.EmailUsuario == usuario.EmailUsuario)
+			foreach (var u in usuarios1)
 			{
-				alredyExistEmail = true;
-				alredyExistEmailMessage = "O e-mail informado já está cadastrado no sistema!";
-				break;
+				if (u.EmailUsuario == usuario.EmailUsuario)
+				{
+					alredyExistEmail = true;
+					alredyExistEmailMessage = "O e-mail informado já está cadastrado no sistema!";
+					break;
+				}
 			}
-		}
+		}		
 
 		if (!alredyExistEmail)
-		{
+		{			
 			usuario.NomeUsuario = usuario.NomeUsuario.Trim();
-			usuario.EmailUsuario = usuario.EmailUsuario.Trim();
+			usuario.EmailUsuario = usuario.EmailUsuario.Trim();			
 			HttpResponseMessage response = await Http.PostAsJsonAsync<Usuario>("api/Usuario", usuario);
 
 			if (response.IsSuccessStatusCode)
