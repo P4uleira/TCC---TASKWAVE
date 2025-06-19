@@ -64,6 +64,16 @@ namespace TASKWAVE.INFRA.Repositories
             return await _context.Usuarios.FindAsync(id);
         }
 
+        public async Task<Usuario?> BuscarPorEmailAsync(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return null;
+
+            return await _context.Usuarios
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.EmailUsuario == email.Trim());
+        }
+
     }
 }
 
