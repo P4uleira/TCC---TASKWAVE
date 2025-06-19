@@ -1,4 +1,6 @@
-﻿using TASKWAVE.DOMAIN.ENTITY;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using TASKWAVE.DOMAIN.ENTITY;
 using TASKWAVE.DOMAIN.Interfaces.Repositories;
 using TASKWAVE.DOMAIN.Interfaces.Services;
 
@@ -15,6 +17,9 @@ namespace TASKWAVE.DOMAIN.Services
 
         public async Task CreateUsuario(Usuario usuario)
         {
+            // Hash da senha antes de salvar o usuário
+            var hasher = new PasswordHasher<Usuario>();
+            usuario.SenhaUsuario = hasher.HashPassword(usuario, usuario.SenhaUsuario);
             await _usuarioRepository.AddAsync(usuario);
         }
 
@@ -41,5 +46,25 @@ namespace TASKWAVE.DOMAIN.Services
         {
             return await _usuarioRepository.GetByIdAsync(id);
         }
+
+        public async Task<Usuario?> AutenticarAsync(string email, string senhaDigitada)
+        {
+            var usuario = await _usuarioRepository.BuscarPorEmailAsync(email);
+
+            if (usuario == null)
+                return null;
+
+            var hasher = new PasswordHasher<Usuario>();
+            var resultado = hasher.VerifyHashedPassword(usuario, usuario.SenhaUsuario, senhaDigitada);
+
+            if (resultado == PasswordVerificationResult.Success)
+            {
+                return usuario;
+            }
+
+            return null; // senha inválida
+        }
+
+
     }
 }
