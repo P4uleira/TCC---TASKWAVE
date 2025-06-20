@@ -1,0 +1,154 @@
+﻿@page "/ProjetoCreate"
+@rendermode InteractiveServer
+@using TASKWAVE.WEB.Components.Layout
+@layout NavMenu
+@inject HttpClient Http
+
+<PageTitle>Criar Projeto</PageTitle>
+
+<main>
+    <div class="container-flex">
+
+        <div class="linha-vertical"></div>
+
+
+        <section class="right-content">
+
+            <EditForm Model="@projectToCreate" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary class="text-warning"/>
+
+                <div class="form-group mb-3">
+                    <label>Nome da Projeto</label>
+                    <InputText class="form-control" @bind-Value="projectToCreate.projectName" placeholder="Insira o nome da Projeto" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Descrição da Projeto</label>
+                    <InputTextArea class="form-control" @bind-Value="projectToCreate.projectDescription" placeholder="Insira a descrição da Projeto" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Descrição da Projeto</label>
+                    <InputDate class="form-control" @bind-Value="projectToCreate.projectCreationDate" placeholder="Insira a descrição da Projeto" />
+                </div>
+
+                <div class="form-group mb-4">
+                    <label>Setor da Projeto</label>
+                    <InputSelect class="form-control" @bind-Value="projectToCreate.teamId">
+                        <option value="">Selecione o equipe que a Projeto pertence</option>
+                        @foreach (var team in teamList)
+                        {
+                            <option value="@team.teamId">@team.teamDescription</option>
+                        }
+                    </InputSelect>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-25">
+                    Criar Projeto
+                </button>
+            </EditForm>
+
+            @if (!string.IsNullOrEmpty(mensageResponse))
+            {
+                <div class="mt-3 alert alert-info">@mensageResponse</div>
+            }
+        </section>
+    </div>
+</main>
+
+
+@code {
+    private List<EquipeResponse> teamList = new();
+    private ProjetoRequest projectToCreate = new();
+    private string mensageResponse;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetSectorsAll();
+    }
+
+    private async Task GetSectorsAll()
+    {
+        try
+        {
+            teamList = await Http.GetFromJsonAsync<List<EquipeResponse>>("api/Equipe");
+        }
+        catch (Exception ex)
+        {
+            mensageResponse = $"Erro ao carregar equipes: {ex.Message}";
+        }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/Projeto", projectToCreate);
+
+            if (response.IsSuccessStatusCode)
+            {
+                mensageResponse = "Projeto criado com sucesso.";
+                projectToCreate = new();
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                mensageResponse = $"Erro: {error}";
+            }
+        }
+        catch (Exception ex)
+        {
+            mensageResponse = $"Erro na requisição: {ex.Message}";
+        }
+    }
+}
+
+<style>
+
+    .container-flex {
+        display: flex;
+        height: 100vh;
+        background-color: #333339;
+        position: relative;
+    }
+
+    .linha-vertical {
+        width: 1px;
+        height: 100vh;
+        background-color: #ccc;
+        position: absolute;
+        left: 250px;
+        top: 0;
+    }
+
+    .right-content {
+        margin-left: 250px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        background-color: #333339;
+        color: white;
+    }
+
+    .form-control {
+        background-color: #333339;
+        color: #fff;
+        border: 1px solid #555;
+        width: 545px;
+    }
+
+        .form-control::placeholder {
+            color: #aaa;
+        }
+
+    .btn-primary {
+        background-color: #1fb6ff;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0d8ddc;
+        }
+</style>
