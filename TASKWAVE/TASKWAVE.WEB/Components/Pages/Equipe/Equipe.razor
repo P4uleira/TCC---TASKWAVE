@@ -53,7 +53,7 @@
 							<InputSelect class="form-select" @bind-Value="selectedTeam.sectorId">
 								@foreach (var sector in sectorListInUse)
 								{
-									<option value="@sector.sectorId">@sector.sectorDescription</option>
+									<option value="@sector.sectorId">@sector.sectorName</option>
 								}
 							</InputSelect>
 						</div>
@@ -72,8 +72,8 @@
 
 	List<HyperLink> Options = new List<HyperLink>
 	{
-		new HyperLink("/SetorCreate", "Criar Setor", "Criar Setor", HyperLink.TypeOfIcon.Add),
-		new HyperLink("/Setor", "Gerenciar Setores", "Gerenciar Setores", HyperLink.TypeOfIcon.List)
+		new HyperLink("/EquipeCreate", "Criar Equipe", "Criar Equipe", HyperLink.TypeOfIcon.Add),
+		new HyperLink("/Equipe", "Gerenciar Equipes", "Gerenciar Equipes", HyperLink.TypeOfIcon.List)
 	};
 
 	private List<SetorResponse> sectorListInUse = new();
